@@ -9,7 +9,7 @@ const JUMP_VELOCITY = 4.5
 
 #Voice
 var current_sample_rate: int = 40000
-var has_loopback: bool = true
+var has_loopback: bool = false
 var local_playback: AudioStreamGeneratorPlayback = null
 var local_voice_buffer: PackedByteArray = PackedByteArray()
 var network_playback: AudioStreamGeneratorPlayback = null
@@ -64,6 +64,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func process_voice_data(voice_data:Dictionary, voice_source:String) -> void:
+	if voice_source == "network": print("SOmething is happenign")
 	get_sample_rate()
 	
 	var decompressed_voice: Dictionary
