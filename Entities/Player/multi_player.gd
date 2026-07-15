@@ -18,7 +18,7 @@ var local_playback: AudioStreamGeneratorPlayback = null
 
 func _ready() -> void:
 	prox_local.stream.mix_rate = current_sample_rate
-	prox_local.play()
+	prox_local.play() 
 	local_playback = prox_local.get_stream_playback()
 	prox_network.stream.mix_rate = current_sample_rate
 	prox_network.play()
