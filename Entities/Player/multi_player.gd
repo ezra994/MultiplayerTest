@@ -10,6 +10,7 @@ const JUMP_VELOCITY = 4.5
 #Voice
 var current_sample_rate: int = 40000
 var local_playback: AudioStreamGeneratorPlayback = null
+var voice_playback: AudioStreamGeneratorPlayback = null
 @onready var voice_chat_test: AudioStreamPlayer3D = %VoiceChatTest
 
 
@@ -23,7 +24,10 @@ func _ready() -> void:
 	prox_network.stream.mix_rate = current_sample_rate
 	prox_network.play()
 	add_to_group("players")
+
 	voice_chat_test.stream.mix_rate = Steam.getVoiceOptimalSampleRate()
+	voice_chat_test.play()
+	voice_playback = voice_chat_test.get_stream_playback()
 	
 	if is_multiplayer_authority():
 		camera_3d.current = true
@@ -84,10 +88,10 @@ func process_voice_data(voice_data: PackedByteArray) -> void:
 			var amplitude: float = float(sample_int) / 32768.0
 			frames_to_push[i / 2] = Vector2(amplitude,  amplitude)
 
-		if voice_chat_test.get_frames_available() >= frames_to_push.size():
-			voice_chat_test.push_buffer(frames_to_push)
-		elif voice_chat_test.get_frames_available() > 0:
-			voice_chat_test.push_buffer(frames_to_push.slice(0, voice_chat_test.get_frames_available()))
+		if voice_playback.get_frames_available() >= frames_to_push.size():
+			voice_playback.push_buffer(frames_to_push)
+		elif voice_playback.get_frames_available() > 0:
+			voice_playback.push_buffer(frames_to_push.slice(0, voice_playback.get_frames_available()))
 			
 func record_voice(is_recording: bool) -> void:
 	# If talking, suppress all other audio or voice comms from the Steam UI
