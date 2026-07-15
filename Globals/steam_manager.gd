@@ -1,5 +1,6 @@
 extends Node
 
+signal spawn_host
 const PACKET_READ_LIMIT: int = 32
 var STEAM_APP_ID: int = 480
 var STEAM_USERNAME: String = ""
@@ -16,7 +17,10 @@ func _init() -> void:
 	OS.set_environment("SteamGameId", str(STEAM_APP_ID))
 
 func _ready() -> void:
-	Steam.steamInit()
+	var init_result: Dictionary = Steam.steamInitEx()
+	
+	print(init_result)
+		
 	STEAM_ID = Steam.getSteamID()
 	STEAM_USERNAME = Steam.getPersonaName()
 	Steam.lobby_joined.connect(_on_lobby_joined)
@@ -30,6 +34,9 @@ func _on_lobby_joined(this_lobby_id: int, permissions: int, locked: bool, respon
 		lobby_id = this_lobby_id
 		peer.connect_to_lobby(this_lobby_id)
 		multiplayer.multiplayer_peer = peer
+		
+		if multiplayer.is_server():
+			spawn_host.emit()
 
 func _on_p2p_session_request(remote_id) -> void:
 	Steam.acceptP2PSessionWithUser(remote_id)

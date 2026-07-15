@@ -33,7 +33,9 @@ func _ready() -> void:
 		steam_id = SteamManager.STEAM_ID
 		player_name = SteamManager.STEAM_USERNAME
 	else:
-		steam_id = multiplayer.multiplayer_peer.get_steam64_from_peer_id(get_multiplayer_authority())
+		var peer = SteamManager.peer
+		var id: int = get_multiplayer_authority()
+		var steam_id = peer.get_steam_id_for_peer_id(id)
 		player_name = Steam.getFriendPersonaName(steam_id)
 	player_name_label.text = player_name
 	

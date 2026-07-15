@@ -6,9 +6,10 @@ var players = {}
 func _ready() -> void:
 	spawn_function = spawn_player
 	if is_multiplayer_authority():
-		multiplayer.peer_connected.connect(spawn_player)
+		multiplayer.peer_connected.connect(spawn)
 		multiplayer.peer_disconnected.connect(remove_player)
 		#call_deferred("spawn_host")
+
 
 
 func spawn_host() -> void:

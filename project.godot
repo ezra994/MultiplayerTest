@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="TestMultiAgain"
-run/main_scene="uid://bqytu7ghbey3o"
+run/main_scene="uid://dfcp8kcwhgnr8"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 

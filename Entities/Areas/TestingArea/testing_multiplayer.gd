@@ -12,7 +12,7 @@ func _ready() -> void:
 	peer = SteamManager.peer
 	Steam.lobby_created.connect(_on_lobby_created) 
 	Steam.lobby_match_list.connect(get_lobby_match_list)
-	multiplayer.peer_connected.connect(_on_peer_connected)
+	#multiplayer.peer_connected.connect(_on_peer_connected)
 	
 func _on_join_pressed() -> void:
 	var lobbies_btns = lobbies_list.get_children()
@@ -74,5 +74,6 @@ func hide_menu() -> void:
 	multiplayer_ui.visible = false
 
 func _on_peer_connected(id: int) -> void:
+	print("HORRAY")
 	if multiplayer.is_server():
 		player_spawner.spawn_player(id)
