@@ -12,6 +12,8 @@ rings = 1
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_qsl6g"]
 
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_jln51"]
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qsl6g"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
@@ -22,6 +24,8 @@ properties/1/replication_mode = 1
 
 [node name="MultiPlayer" type="CharacterBody3D" unique_id=619027815]
 script = ExtResource("1_qsl6g")
+steam_id = null
+player_name = null
 
 [node name="Voice" type="Node3D" parent="." unique_id=703985031]
 
@@ -52,6 +56,10 @@ stream = SubResource("AudioStreamGenerator_ras5s")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6990206, -0.1188606)
 stream = SubResource("AudioStreamGenerator_qsl6g")
+
+[node name="VoiceChatTest" type="AudioStreamPlayer3D" parent="." unique_id=2115557923]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamGenerator_jln51")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1944264684]
 replication_config = SubResource("SceneReplicationConfig_qsl6g")

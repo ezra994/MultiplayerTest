@@ -9,9 +9,9 @@ const JUMP_VELOCITY = 4.5
 
 #Voice
 var current_sample_rate: int = 40000
-var has_loopback: bool = false
 var local_playback: AudioStreamGeneratorPlayback = null
-var network_playback: AudioStreamGeneratorPlayback = null
+@onready var voice_chat_test: AudioStreamPlayer3D = %VoiceChatTest
+
 
 @onready var prox_network: AudioStreamPlayer3D = %ProxNetwork
 @onready var prox_local: AudioStreamPlayer3D = %ProxLocal
@@ -22,13 +22,14 @@ func _ready() -> void:
 	local_playback = prox_local.get_stream_playback()
 	prox_network.stream.mix_rate = current_sample_rate
 	prox_network.play()
-	network_playback = prox_network.get_stream_playback()
 	add_to_group("players")
+	voice_chat_test.stream.mix_rate = Steam.getVoiceOptimalSampleRate()
 	
 	if is_multiplayer_authority():
 		camera_3d.current = true
 		steam_id = SteamManager.STEAM_ID
 		player_name = SteamManager.STEAM_USERNAME
+		record_voice(true)
 	else:
 		var peer = SteamManager.peer
 		var id: int = get_multiplayer_authority()
@@ -53,65 +54,46 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	move_and_slide()
 
-# ---- VOICE: RPC based ----
+func _input(event: InputEvent) -> void:
+	if !is_multiplayer_authority():
+		return
 
-# Called on the authority's own client after capturing mic input.
-# rpc() with "call_remote" sends this to every other connected peer,
-# but does NOT run locally on the sender (so no self-echo here).
-@rpc("authority", "call_remote", "unreliable")
-func receive_voice_data(voice_data: PackedByteArray) -> void:
-	_play_voice(voice_data, network_playback)
+func _process(delta: float) -> void:
+	check_for_voice()
 
-func _play_voice(raw_buffer: PackedByteArray, playback_to_use: AudioStreamGeneratorPlayback) -> void:
-	get_sample_rate()
-	var decompressed_voice: Dictionary = Steam.decompressVoice(raw_buffer, current_sample_rate)
-	
-	if decompressed_voice['result'] == Steam.VOICE_RESULT_OK and decompressed_voice['uncompressed'].size() > 0:
-		var voice_buffer = decompressed_voice['uncompressed']
-		voice_buffer.resize(decompressed_voice['size'])
-		var frames_available = playback_to_use.get_frames_available()
-		
-		for i in range(0, min(frames_available * 2, voice_buffer.size() - 1), 2):
-			if i + 1 >= voice_buffer.size():
-				break
-			var raw_value: int = voice_buffer[i] | (voice_buffer[i + 1] << 8)
-			raw_value = (raw_value + 32768) & 0xffff
-			var amplitude: float = float(raw_value - 32768) / 32768.0
-			playback_to_use.push_frame(Vector2(amplitude, amplitude))
+func check_for_voice() -> void:
+	var available_voice: Dictionary = Steam.getAvailableVoice()
 
+	if available_voice['result'] == Steam.VoiceResult.VOICE_RESULT_OK and available_voice['size'] > 0:
+		var voice_data: Dictionary = Steam.getVoice()
+
+		if voice_data['result'] == Steam.VOICE_RESULT_OK and voice_data['size'] > 0:
+			# Here we pass the voice data off to the network
+			process_voice_data.rpc(voice_data['buffer'])
+
+# @rpc("any_peer", "call_remote", "unreliable")
+func process_voice_data(voice_data: PackedByteArray) -> void:
+	var decompressed_voice: Dictionary = Steam.decompressVoice(voice_data, current_sample_rate)
+
+	if decompressed_voice['result'] == Steam.VoiceResult.VOICE_RESULT_OK and decompressed_voice['size'] > 0:
+		var frames_to_push: PackedVector2Array = PackedVector2Array()
+		frames_to_push.resize(decompressed_voice['size'] / 2)
+
+		for i in range(0, decompressed_voice['size'], 2):
+			var sample_int: int = decompressed_voice['uncompressed'].decode_s16(i)
+			var amplitude: float = float(sample_int) / 32768.0
+			frames_to_push[i / 2] = Vector2(amplitude,  amplitude)
+
+		if voice_chat_test.get_frames_available() >= frames_to_push.size():
+			voice_chat_test.push_buffer(frames_to_push)
+		elif voice_chat_test.get_frames_available() > 0:
+			voice_chat_test.push_buffer(frames_to_push.slice(0, voice_chat_test.get_frames_available()))
+			
 func record_voice(is_recording: bool) -> void:
-	Steam.setInGameVoiceSpeaking(SteamManager.STEAM_ID, is_recording)
+	# If talking, suppress all other audio or voice comms from the Steam UI
+	Steam.setInGameVoiceSpeaking(steam_id, is_recording)
+
 	if is_recording:
 		Steam.startVoiceRecording()
 	else:
 		Steam.stopVoiceRecording()
-
-func _input(event: InputEvent) -> void:
-	if !is_multiplayer_authority():
-		return
-	if event.is_action_pressed("voice_record"):
-		record_voice(true)
-	elif event.is_action_released("voice_record"):
-		record_voice(false)
-
-func _process(delta: float) -> void:
-	if is_multiplayer_authority():
-		check_for_voice()
-
-func check_for_voice() -> void:
-	var available_voice: Dictionary = Steam.getAvailableVoice()
-	if available_voice["result"] == Steam.VOICE_RESULT_OK and available_voice["size"] > 0:
-		var voice_data: Dictionary = Steam.getVoice()
-		if voice_data["result"] == Steam.VOICE_RESULT_OK:
-			rpc("receive_voice_data", voice_data["buffer"])
-			
-			if has_loopback:
-				_play_voice(voice_data["buffer"], local_playback)
-
-func get_sample_rate(is_toggled: bool = true) -> void:
-	if is_toggled:
-		current_sample_rate = Steam.getVoiceOptimalSampleRate()
-	else:
-		current_sample_rate = 48000
-	prox_local.stream.mix_rate = current_sample_rate
-	prox_network.stream.mix_rate = current_sample_rate
