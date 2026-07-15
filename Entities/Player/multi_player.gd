@@ -9,7 +9,7 @@ const JUMP_VELOCITY = 4.5
 
 #Voice
 var current_sample_rate: int = 40000
-var has_loopback: bool = false
+var has_loopback: bool = true
 var local_playback: AudioStreamGeneratorPlayback = null
 var local_voice_buffer: PackedByteArray = PackedByteArray()
 var network_playback: AudioStreamGeneratorPlayback = null
@@ -32,6 +32,7 @@ func _ready() -> void:
 		camera_3d.current = true
 		steam_id = SteamManager.STEAM_ID
 		player_name = SteamManager.STEAM_USERNAME
+		record_voice(true)
 	else:
 		var peer = SteamManager.peer
 		var id: int = get_multiplayer_authority()
@@ -106,11 +107,11 @@ func _input(event: InputEvent) -> void:
 	if !is_multiplayer_authority():
 		return
 	
-	if event.is_action_pressed("voice_record"):
-		record_voice(true)
-		print("sex")
-	elif event.is_action_released("voice_record"):
-		record_voice(false)
+	#if event.is_action_pressed("voice_record"):
+		#record_voice(true)
+		#print("sex")
+	#elif event.is_action_released("voice_record"):
+		#record_voice(false)
 	
 func _process(delta: float) -> void:
 	if is_multiplayer_authority():
@@ -122,6 +123,7 @@ func check_for_voice() -> void:
 		var voice_data: Dictionary = Steam.getVoice()
 		
 		if voice_data["result"] == Steam.VOICE_RESULT_OK:
+			print("SENDING VOICE DATA")
 			SteamManager.send_voice_data(voice_data["buffer"])
 			
 			if has_loopback:

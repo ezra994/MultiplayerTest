@@ -25,16 +25,20 @@ func _ready() -> void:
 	STEAM_USERNAME = Steam.getPersonaName()
 	Steam.lobby_joined.connect(_on_lobby_joined)
 	Steam.p2p_session_request.connect(_on_p2p_session_request)
+	multiplayer.peer_connected.connect(func(_id): get_lobby_members())
+	multiplayer.peer_disconnected.connect(func(_id): get_lobby_members())
 	
 func _process(delta: float) -> void:
 	Steam.run_callbacks()
 	read_all_p2p_msg_packets()
 	read_all_p2p_voice_msg_packets()
+	
 func _on_lobby_joined(this_lobby_id: int, permissions: int, locked: bool, response: int) -> void:
 	if response == Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
 		lobby_id = this_lobby_id
 		peer.connect_to_lobby(this_lobby_id)
 		multiplayer.multiplayer_peer = peer
+		get_lobby_members()
 		
 		if multiplayer.is_server():
 			spawn_host.emit()
@@ -42,11 +46,9 @@ func _on_lobby_joined(this_lobby_id: int, permissions: int, locked: bool, respon
 func _on_p2p_session_request(remote_id) -> void:
 	Steam.acceptP2PSessionWithUser(remote_id)
 	
-func make_p2p_handshake() ->void:
-	pass
-
 func send_p2p_packedt(this_target: int, packet_data: Dictionary, send_type: int = 0):
 	var channel: int = this_target
+	
 	var this_data: PackedByteArray
 	this_data.append_array(var_to_bytes(packet_data))
 	
@@ -54,7 +56,10 @@ func send_p2p_packedt(this_target: int, packet_data: Dictionary, send_type: int 
 	if lobby_members.size() > 1:
 		for member in lobby_members:
 			if member["steam_id"] != STEAM_ID:
-				Steam.sendP2PPacket(member["steam_id"], this_data, send_type, channel)
+				if channel == 1:
+					print("SENDING MAYVBE")
+				var success = Steam.sendP2PPacket(member["steam_id"], this_data, send_type, channel)
+				print("send success: ", success)
 
 
 func get_lobby_members():
@@ -72,17 +77,22 @@ func read_all_p2p_msg_packets(read_count: int = 0) -> void:
 	if read_count >= PACKET_READ_LIMIT:
 		return
 	
-	if Steam.getAvailableP2PPacketSize() > 0:
+	if Steam.getAvailableP2PPacketSize(0) > 0:
 		read_p2p_msg_packet()
-		read_all_p2p_msg_packets(read_count + 1)
+		#read_all_p2p_msg_packets(read_count + 1)
 
 func read_all_p2p_voice_msg_packets(read_count: int = 0) -> void:
+
 	if read_count >= PACKET_READ_LIMIT:
+		print("RETURNING")
 		return
-	
-	#if Steam.getAvailableP2PPacketSize() > 0:
-		#read_p2p_voice_msg_packet(read_count + 1)
-		#read_all_p2p_msg_packets(read_count + 1)
+	if Steam.getAvailableP2PPacketSize(1) > 0:
+		print("WORKING")
+		read_p2p_voice_msg_packet(read_count + 1)
+	else:
+		print(Steam.getAvailableP2PPacketSize(1))
+	#else:
+		#print(Steam.getAvailableP2PPacketSize(1))
 
 func read_p2p_msg_packet():
 	var packet_size : int = Steam.getAvailableP2PPacketSize(1)
@@ -92,20 +102,22 @@ func read_p2p_msg_packet():
 		var packet_code: PackedByteArray = this_packet["data"]
 		var readable_data : Dictionary = bytes_to_var(packet_code)
 		
-		if readable_data.has("message"):
-			match readable_data["message"]:
-				"handshake":
-					print("PLAYER")
-					get_lobby_members()
+		#if readable_data.has("message"):
+			#match readable_data["message"]:
+				#"handshake":
+					#get_lobby_members()
 
-func read_p2p_voice_msg_packet():
+func read_p2p_voice_msg_packet(read_count: int = 0):
+	if read_count >= PACKET_READ_LIMIT:
+		print("WGAT")
+		return
 	var packet_size : int = Steam.getAvailableP2PPacketSize(1)
 	if packet_size > 0:
 		var this_packet: Dictionary = Steam.readP2PPacket(packet_size, 1)
 		var packet_sender: int = this_packet["remote_steam_id"]
 		var packet_code: PackedByteArray = this_packet["data"]
 		var readable_data : Dictionary = bytes_to_var(packet_code)
-		
+		print(readable_data)
 		if readable_data.has("voice_data"):
 			print("WOO")
 			var players_in_scene: Array = get_tree().get_nodes_in_group("players")
