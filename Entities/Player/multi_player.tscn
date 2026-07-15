@@ -24,8 +24,6 @@ properties/1/replication_mode = 1
 
 [node name="MultiPlayer" type="CharacterBody3D" unique_id=619027815]
 script = ExtResource("1_qsl6g")
-steam_id = null
-player_name = null
 
 [node name="Voice" type="Node3D" parent="." unique_id=703985031]
 

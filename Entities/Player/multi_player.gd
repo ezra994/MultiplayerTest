@@ -71,7 +71,7 @@ func check_for_voice() -> void:
 			# Here we pass the voice data off to the network
 			process_voice_data.rpc(voice_data['buffer'])
 
-# @rpc("any_peer", "call_remote", "unreliable")
+@rpc("any_peer", "call_remote", "unreliable")
 func process_voice_data(voice_data: PackedByteArray) -> void:
 	var decompressed_voice: Dictionary = Steam.decompressVoice(voice_data, current_sample_rate)
 
