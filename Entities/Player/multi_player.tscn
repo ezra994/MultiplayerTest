@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://btawc12h1gus0"]
+
+[ext_resource type="Script" uid="uid://d2gh5om0opmyq" path="res://Entities/Player/multi_player.gd" id="1_qsl6g"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jln51"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jln51"]
+radial_segments = 7
+rings = 1
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_ras5s"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_qsl6g"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qsl6g"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="MultiPlayer" type="CharacterBody3D" unique_id=619027815]
+script = ExtResource("1_qsl6g")
+
+[node name="Voice" type="Node3D" parent="." unique_id=703985031]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=558564288]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_jln51")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=248906267]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_jln51")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1060477827]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.99994755, -0.010243364, 0, 0.010243364, 0.99994755, 0, 1.6895359, -0.054991305)
+
+[node name="PlayerNameLabel" type="Label3D" parent="." unique_id=196668960]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8516402, 0)
+billboard = 1
+text = "Fubert"
+
+[node name="ProxNetwork" type="AudioStreamPlayer3D" parent="." unique_id=912294237]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6990206, -0.1188606)
+stream = SubResource("AudioStreamGenerator_ras5s")
+
+[node name="ProxLocal" type="AudioStreamPlayer3D" parent="." unique_id=93486257]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6990206, -0.1188606)
+stream = SubResource("AudioStreamGenerator_qsl6g")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1944264684]
+replication_config = SubResource("SceneReplicationConfig_qsl6g")

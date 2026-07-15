@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c42rnpen4cwhp"]
+
+[ext_resource type="Script" uid="uid://d0n6qi0f0ep60" path="res://Player/Weapon/sword.gd" id="1_1uf8k"]
+
+[node name="Sword" type="CharacterBody3D" unique_id=774936765]
+script = ExtResource("1_1uf8k")
+metadata/_custom_type_script = "uid://cx6nbnmc8sao7"
