@@ -44,6 +44,7 @@ func _on_lobby_joined(this_lobby_id: int, permissions: int, locked: bool, respon
 			spawn_host.emit()
 
 func _on_p2p_session_request(remote_id) -> void:
+	print("GOT")
 	Steam.acceptP2PSessionWithUser(remote_id)
 	
 func send_p2p_packedt(this_target: int, packet_data: Dictionary, send_type: int = 0):
@@ -83,14 +84,15 @@ func read_all_p2p_msg_packets(read_count: int = 0) -> void:
 
 func read_all_p2p_voice_msg_packets(read_count: int = 0) -> void:
 
+	
 	if read_count >= PACKET_READ_LIMIT:
 		print("RETURNING")
 		return
 	if Steam.getAvailableP2PPacketSize(1) > 0:
 		print("WORKING")
 		read_p2p_voice_msg_packet(read_count + 1)
-	else:
-		print(Steam.getAvailableP2PPacketSize(1))
+	#else:
+		#print(Steam.getAvailableP2PPacketSize(1))
 	#else:
 		#print(Steam.getAvailableP2PPacketSize(1))
 
