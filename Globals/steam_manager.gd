@@ -1,6 +1,7 @@
 extends Node
 
 signal spawn_host
+signal setup
 const PACKET_READ_LIMIT: int = 32
 var STEAM_APP_ID: int = 480
 var STEAM_USERNAME: String = ""
@@ -39,10 +40,12 @@ func _on_lobby_joined(this_lobby_id: int, permissions: int, locked: bool, respon
 		lobby_id = this_lobby_id
 		peer.connect_to_lobby(this_lobby_id)
 		multiplayer.multiplayer_peer = peer
+		setup.emit()
 		get_lobby_members()
 		
 		if multiplayer.is_server():
 			spawn_host.emit()
+			print("W")
 
 func _on_p2p_session_request(remote_id) -> void:
 	print("GOT")

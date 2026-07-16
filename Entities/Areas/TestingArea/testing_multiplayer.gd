@@ -42,6 +42,7 @@ func _on_lobby_created(connect: int, _lobby_id: int) -> void:
 		
 		peer.host_with_lobby(lobby_id)
 		multiplayer.multiplayer_peer = peer
+		player_spawner.setup()
 		player_spawner.spawn_host()
 		
 func get_lobby_match_list(lobbies: Array) -> void:
