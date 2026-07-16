@@ -8,10 +8,6 @@
 radial_segments = 7
 rings = 1
 
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_ras5s"]
-
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_qsl6g"]
-
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_jln51"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qsl6g"]
@@ -45,21 +41,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8516402, 0)
 billboard = 1
 text = "Fubert"
 
-[node name="ProxNetwork" type="AudioStreamPlayer3D" parent="." unique_id=912294237]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6990206, -0.1188606)
-stream = SubResource("AudioStreamGenerator_ras5s")
-
-[node name="ProxLocal" type="AudioStreamPlayer3D" parent="." unique_id=93486257]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6990206, -0.1188606)
-stream = SubResource("AudioStreamGenerator_qsl6g")
-
 [node name="VoiceChatTest" type="AudioStreamPlayer3D" parent="." unique_id=2115557923]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamGenerator_jln51")
 unit_size = 1.0
-pitch_scale = 5.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1944264684]
 replication_config = SubResource("SceneReplicationConfig_qsl6g")

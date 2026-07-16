@@ -14,17 +14,9 @@ var voice_playback: AudioStreamGeneratorPlayback = null
 @onready var voice_chat_test: AudioStreamPlayer3D = %VoiceChatTest
 
 
-@onready var prox_network: AudioStreamPlayer3D = %ProxNetwork
-@onready var prox_local: AudioStreamPlayer3D = %ProxLocal
-
 func _ready() -> void:
-	current_sample_rate = Steam.getVoiceOptimalSampleRate()  # set this first
-	prox_local.play() 
-	local_playback = prox_local.get_stream_playback()
-	prox_network.stream.mix_rate = current_sample_rate
-	prox_network.play()
 	add_to_group("players")
-
+	current_sample_rate = Steam.getVoiceOptimalSampleRate()
 	voice_chat_test.stream.mix_rate = Steam.getVoiceOptimalSampleRate()
 	voice_chat_test.play()
 	voice_playback = voice_chat_test.get_stream_playback()

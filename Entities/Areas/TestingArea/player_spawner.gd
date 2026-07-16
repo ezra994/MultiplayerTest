@@ -8,9 +8,6 @@ func _ready() -> void:
 	if is_multiplayer_authority():
 		multiplayer.peer_connected.connect(spawn)
 		multiplayer.peer_disconnected.connect(remove_player)
-		#call_deferred("spawn_host")
-
-
 
 func spawn_host() -> void:
 	if is_multiplayer_authority():
