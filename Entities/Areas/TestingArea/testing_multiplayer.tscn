@@ -84,5 +84,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59235, -9.516685)
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2022203157]
 transform = Transform3D(1, 0, 0, 0, 0.8715809, 0.4902517, 0, -0.4902517, 0.8715809, 0, 11.511426, 18.586552)
 
+[node name="ProjectileShooter" type="MultiplayerSpawner" parent="." unique_id=333583190]
+_spawnable_scenes = PackedStringArray("uid://c3im7dphtwp4e")
+spawn_path = NodePath("..")
+
 [connection signal="pressed" from="MultiplayerUi/VBoxContainer/HBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="MultiplayerUi/VBoxContainer/HBoxContainer/Join" to="." method="_on_join_pressed"]

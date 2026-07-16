@@ -24,6 +24,24 @@ func open_lobby_list() -> void:
 	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE)
 	Steam.addRequestLobbyListStringFilter("game_id", "SexSexMungus", Steam.LOBBY_COMPARISON_EQUAL)
 	Steam.requestLobbyList()
+		
+func get_lobby_match_list(lobbies: Array) -> void:
+	for lobby in lobbies:
+
+		var lobby_name = Steam.getLobbyData(lobby, "name")
+		var members = Steam.getNumLobbyMembers(lobby)
+		var max_members = Steam.getLobbyMemberLimit(lobby)
+		
+		var button := Button.new()
+		button.set_text("{0} | {1}/{2}".format([lobby_name, members, max_members]))
+		button.set_size(Vector2(400, 50))
+		button.pressed.connect(join_lobby.bind(lobby))
+		lobbies_list.add_child(button)
+		
+func join_lobby(_lobby_id: int) -> void:
+	lobby_id = _lobby_id
+	Steam.joinLobby(_lobby_id)
+	hide_menu()
 
 func _on_host_pressed() -> void:
 	if lobby_created: return
@@ -45,23 +63,5 @@ func _on_lobby_created(connect: int, _lobby_id: int) -> void:
 		player_spawner.setup()
 		player_spawner.spawn_host()
 		
-func get_lobby_match_list(lobbies: Array) -> void:
-	for lobby in lobbies:
-		print(lobby)
-		var lobby_name = Steam.getLobbyData(lobby, "name")
-		var members = Steam.getNumLobbyMembers(lobby)
-		var max_members = Steam.getLobbyMemberLimit(lobby)
-		
-		var button := Button.new()
-		button.set_text("{0} | {1}/{2}".format([lobby_name, members, max_members]))
-		button.set_size(Vector2(400, 50))
-		button.pressed.connect(join_lobby.bind(lobby))
-		lobbies_list.add_child(button)
-		
-func join_lobby(_lobby_id: int) -> void:
-	lobby_id = _lobby_id
-	Steam.joinLobby(_lobby_id)
-	hide_menu()
-
 func hide_menu() -> void:
 	multiplayer_ui.visible = false
