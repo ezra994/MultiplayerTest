@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://btawc12h1gus0"]
 
 [ext_resource type="Script" uid="uid://d2gh5om0opmyq" path="res://Entities/Player/multi_player.gd" id="1_qsl6g"]
+[ext_resource type="Script" uid="uid://bb06c4votb8yj" path="res://Entities/Player/center_container.gd" id="2_ras5s"]
+[ext_resource type="PackedScene" uid="uid://r0xhch7swcmk" path="res://Entities/Player/Projectiles/test_pistol.glb" id="3_diiaq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jln51"]
 
@@ -35,6 +37,12 @@ mesh = SubResource("CapsuleMesh_jln51")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.99994755, -0.010243364, 0, 0.010243364, 0.99994755, 0, 1.6895359, -0.054991305)
 
+[node name="test_pistol" parent="Camera3D" unique_id=1549105184 instance=ExtResource("3_diiaq")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.50256014, -0.46177018, -0.9742873)
+
+[node name="Marker3D" type="Marker3D" parent="Camera3D/test_pistol" unique_id=751885937]
+transform = Transform3D(1, 0, 0, 8.485152e-31, 1, 0, 0, 0, 1, 0.0813137, 0, 0.92350054)
+
 [node name="PlayerNameLabel" type="Label3D" parent="." unique_id=196668960]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8516402, 0)
@@ -48,3 +56,39 @@ unit_size = 1.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1944264684]
 replication_config = SubResource("SceneReplicationConfig_qsl6g")
+
+[node name="Ui" type="Control" parent="." unique_id=42175835]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Ui" unique_id=690340959]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ras5s")
+
+[node name="Right" type="Line2D" parent="Ui/CenterContainer" unique_id=551228737]
+points = PackedVector2Array(4, 0, 0, 5)
+width = 2.0
+
+[node name="Top2" type="Line2D" parent="Ui/CenterContainer" unique_id=1636598955]
+points = PackedVector2Array(-4, 0, 0, 5)
+width = 2.0
+
+[node name="Left" type="Line2D" parent="Ui/CenterContainer" unique_id=198996838]
+points = PackedVector2Array(-4, 0, 0, -5)
+width = 2.0
+
+[node name="Bottom2" type="Line2D" parent="Ui/CenterContainer" unique_id=712589384]
+points = PackedVector2Array(4, 0, 0, -5)
+width = 2.0

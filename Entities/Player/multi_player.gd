@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var input_dir := Input.get_vector("Left", "Right", "Forward", "Backwards")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED
@@ -54,18 +54,18 @@ func _input(event: InputEvent) -> void:
 	if !is_multiplayer_authority():
 		return
 	
-	if event.is_action_pressed("hit"):
+	if event.is_action_released("hit"):
 		request_shoot() 
+		animate_gun()
 		
 
 
-
+@onready var marker_3d: Marker3D = $Camera3D/test_pistol/Marker3D
 func request_shoot() -> void:
 	if !is_multiplayer_authority():
 		return
 
-	var pos = global_position + Vector3(0, 0, -4)
-	SteamManager.shoot_ball.rpc_id(1, pos) #1 is server
+	SteamManager.shoot_ball.rpc_id(1, marker_3d.global_position) #1 is server
 
 
 	
@@ -109,3 +109,10 @@ func record_voice(is_recording: bool) -> void:
 		Steam.startVoiceRecording()
 	else:
 		Steam.stopVoiceRecording()
+
+@onready var test_pistol: Node3D = $Camera3D/test_pistol
+var tween: Tween
+func animate_gun() -> void:
+	if tween: tween.kill()
+	tween = create_tween()
+	tween.tween_property(test_pistol, "rotation", Vector3(test_pistol.rotation.x + deg_to_rad(360), test_pistol.rotation.y, test_pistol.rotation.z), .8).set_ease(Tween.EASE_IN_OUT)
