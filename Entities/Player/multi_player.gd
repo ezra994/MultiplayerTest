@@ -15,7 +15,6 @@ var voice_playback: AudioStreamGeneratorPlayback = null
 
 func _enter_tree() -> void:
 	if is_multiplayer_authority():
-		camera_3d.current = true
 		steam_id = SteamManager.STEAM_ID
 		player_name = SteamManager.STEAM_USERNAME
 		record_voice(true)
@@ -27,6 +26,7 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	add_to_group("players")
+	if is_multiplayer_authority(): camera_3d.current = true
 	current_sample_rate = Steam.getVoiceOptimalSampleRate()
 	voice_chat_test.stream.mix_rate = Steam.getVoiceOptimalSampleRate()
 	voice_chat_test.play()
