@@ -3,12 +3,14 @@ extends Node3D
 @onready var multiplayer_ui: Control = %MultiplayerUi
 @onready var lobbies_list: VBoxContainer = %LobbiesList
 @onready var player_spawner: MultiplayerSpawner = %PlayerSpawner
+@onready var spawn_container: Node3D = %SpawnContainer
 
 var lobby_created: bool = false
 var lobby_id: int = 0
 var peer: SteamMultiplayerPeer
 
 func _ready() -> void:
+	SteamManager.projectile_spawn_container = spawn_container
 	peer = SteamManager.peer
 	Steam.lobby_created.connect(_on_lobby_created) 
 	Steam.lobby_match_list.connect(get_lobby_match_list)

@@ -57,16 +57,17 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("hit"):
 		request_shoot() 
 		
-const TEST_PROJECTILE = preload("uid://c3im7dphtwp4e")
 
-@rpc("any_peer", "call_local")
+
+
 func request_shoot() -> void:
 	if !is_multiplayer_authority():
 		return
-	var thing = TEST_PROJECTILE.instantiate()
-	add_child(thing)
-	thing.global_position = global_position + Vector3(0, 0, -4)
-	print(thing)
+
+	var pos = global_position + Vector3(0, 0, -4)
+	SteamManager.shoot_ball.rpc_id(1, pos) #1 is server
+
+
 	
 
 func _process(delta: float) -> void:
