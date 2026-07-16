@@ -13,14 +13,7 @@ var local_playback: AudioStreamGeneratorPlayback = null
 var voice_playback: AudioStreamGeneratorPlayback = null
 @onready var voice_chat_test: AudioStreamPlayer3D = %VoiceChatTest
 
-
-func _ready() -> void:
-	add_to_group("players")
-	current_sample_rate = Steam.getVoiceOptimalSampleRate()
-	voice_chat_test.stream.mix_rate = Steam.getVoiceOptimalSampleRate()
-	voice_chat_test.play()
-	voice_playback = voice_chat_test.get_stream_playback()
-	
+func _enter_tree() -> void:
 	if is_multiplayer_authority():
 		camera_3d.current = true
 		steam_id = SteamManager.STEAM_ID
@@ -31,6 +24,13 @@ func _ready() -> void:
 		var id: int = get_multiplayer_authority()
 		steam_id = peer.get_steam_id_for_peer_id(id)
 		player_name = Steam.getFriendPersonaName(steam_id)
+
+func _ready() -> void:
+	add_to_group("players")
+	current_sample_rate = Steam.getVoiceOptimalSampleRate()
+	voice_chat_test.stream.mix_rate = Steam.getVoiceOptimalSampleRate()
+	voice_chat_test.play()
+	voice_playback = voice_chat_test.get_stream_playback()
 	player_name_label.text = player_name
 
 func _physics_process(delta: float) -> void:
