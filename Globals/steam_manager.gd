@@ -57,9 +57,11 @@ func get_lobby_members():
 var projectile_spawn_container: Node3D
 const TEST_PROJECTILE = preload("uid://c3im7dphtwp4e")
 @rpc("any_peer", "call_local")
-func shoot_ball(pos: Vector3) -> void:
+func shoot_ball(pos: Vector3, force: float, dir) -> void:
 	if not multiplayer.is_server(): return
 	var new_ball = TEST_PROJECTILE.instantiate()
 	#new_ball.source = multiplayer.get_remote_sender_id()
+	new_ball.speed = force
 	new_ball.position = pos
+	new_ball.direction = dir
 	projectile_spawn_container.add_child(new_ball, true)

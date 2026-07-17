@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bqytu7ghbey3o"]
 
-[ext_resource type="PackedScene" uid="uid://crx0cb11q8kxt" path="res://Player/player.tscn" id="1_rkoyf"]
+[ext_resource type="PackedScene" uid="uid://btawc12h1gus0" path="res://Entities/Player/multi_player.tscn" id="1_rkoyf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_elk8i"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -27,8 +27,20 @@ shadow_enabled = true
 use_collision = true
 size = Vector3(70, 1, 70)
 
-[node name="Player" parent="." unique_id=1142673693 instance=ExtResource("1_rkoyf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5433624, 0)
+[node name="MultiPlayer" parent="." unique_id=619027815 instance=ExtResource("1_rkoyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9901738, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Player" unique_id=2125186509]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4683993, 3.8155193)
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1001578513]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7247546, -11.058653)
+use_collision = true
+size = Vector3(4.4, 1, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1172576499]
+transform = Transform3D(1, 0, 0, 0, 4.4475756, 0, 0, 0, 1, 0, 2.3758862, -14.508493)
+use_collision = true
+size = Vector3(4.4, 1, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=1855178209]
+transform = Transform3D(1, 0, 0, 0, 0.48938245, -0.8720693, 0, 0.8720693, 0.48938245, 0, 2.8260293, 12.462492)
+use_collision = true
+size = Vector3(9.34, 12.205, 1)

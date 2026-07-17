@@ -21,7 +21,14 @@ properties/1/spawn = true
 properties/1/replication_mode = 1
 
 [node name="MultiPlayer" type="CharacterBody3D" unique_id=619027815]
+collision_layer = 2
 script = ExtResource("1_qsl6g")
+
+[node name="test_pistol" parent="." unique_id=1549105184 instance=ExtResource("3_diiaq")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.50256014, 1.2377698, -1.0339576)
+
+[node name="Marker3D" type="Marker3D" parent="test_pistol" unique_id=751885937]
+transform = Transform3D(1, 0, 0, 8.485152e-31, 1, 0, 0, 0, 1, 0.0813137, 0, 0.92350054)
 
 [node name="Voice" type="Node3D" parent="." unique_id=703985031]
 
@@ -35,13 +42,7 @@ mesh = SubResource("CapsuleMesh_jln51")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1060477827]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.99994755, -0.010243364, 0, 0.010243364, 0.99994755, 0, 1.6895359, -0.054991305)
-
-[node name="test_pistol" parent="Camera3D" unique_id=1549105184 instance=ExtResource("3_diiaq")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.50256014, -0.46177018, -0.9742873)
-
-[node name="Marker3D" type="Marker3D" parent="Camera3D/test_pistol" unique_id=751885937]
-transform = Transform3D(1, 0, 0, 8.485152e-31, 1, 0, 0, 0, 1, 0.0813137, 0, 0.92350054)
+transform = Transform3D(1, 0, 0, 0, 0.99994755, -0.010243364, 0, 0.010243364, 0.99994755, 0, 5.702033, 9.7410755)
 
 [node name="PlayerNameLabel" type="Label3D" parent="." unique_id=196668960]
 unique_name_in_owner = true
@@ -92,3 +93,9 @@ width = 2.0
 [node name="Bottom2" type="Line2D" parent="Ui/CenterContainer" unique_id=712589384]
 points = PackedVector2Array(4, 0, 0, -5)
 width = 2.0
+
+[node name="slide_check" type="RayCast3D" parent="." unique_id=525351254]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.011650801)
+target_position = Vector3(0, 0, 1)
+collision_mask = 8193
+collide_with_areas = true

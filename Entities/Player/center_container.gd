@@ -7,10 +7,10 @@ var lines: Array
 
 
 func _ready() -> void:
-	if is_multiplayer_authority():
-		
+	if !is_multiplayer_authority():
+		hide()
+	else:
 		lines = get_children()
-		
 		var i = 0
 		for line in lines:
 			if line is Line2D:
