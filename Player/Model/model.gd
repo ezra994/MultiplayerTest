@@ -27,7 +27,7 @@ var current_move : Move
 
 func _ready():
 	var bone_idx = skeleton.find_bone("spine")
-	print(skeleton.get_bone_pose_position(bone_idx))
+	#print(skeleton.get_bone_pose_position(bone_idx))
 	current_move = moves["idle"]
 	for move in moves.values():
 		print(move.name)

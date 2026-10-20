@@ -1,0 +1,67 @@
+{
+	"categories": [
+		{
+			"uuid": "29976683-c414-4a0f-ae8b-d314b4ab5f41",
+			"title": "Task",
+			"color": "569eff"
+		}
+	],
+	"stages": [
+		{
+			"uuid": "8acaa558-a80d-4365-9dc4-f39e488df6d1",
+			"title": "Todo",
+			"tasks": [
+				"5e17e3f3-5fe9-4e2f-8b48-274811da93fd",
+				"bb749660-66a4-4753-ad6d-26cfcb173d0c"
+			]
+		},
+		{
+			"uuid": "1706e190-e2b0-4a53-b5a5-0edea49b2598",
+			"title": "Doing",
+			"tasks": []
+		},
+		{
+			"uuid": "13a6210c-1429-4527-ac80-f2cc590ba3e9",
+			"title": "Done",
+			"tasks": []
+		}
+	],
+	"tasks": [
+		{
+			"uuid": "5e17e3f3-5fe9-4e2f-8b48-274811da93fd",
+			"title": "Today",
+			"description": "",
+			"category": "29976683-c414-4a0f-ae8b-d314b4ab5f41",
+			"steps": [
+				{
+					"details": "A finger gun with resuable data\n",
+					"done": false
+				},
+				{
+					"details": "Destructable objects",
+					"done": false
+				}
+			]
+		},
+		{
+			"uuid": "bb749660-66a4-4753-ad6d-26cfcb173d0c",
+			"title": "New task",
+			"description": "",
+			"category": "29976683-c414-4a0f-ae8b-d314b4ab5f41",
+			"steps": []
+		}
+	],
+	"layout": {
+		"columns": [
+			[
+				"8acaa558-a80d-4365-9dc4-f39e488df6d1"
+			],
+			[
+				"1706e190-e2b0-4a53-b5a5-0edea49b2598"
+			],
+			[
+				"13a6210c-1429-4527-ac80-f2cc590ba3e9"
+			]
+		]
+	}
+}

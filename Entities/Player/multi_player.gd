@@ -100,7 +100,6 @@ func _input(event: InputEvent) -> void:
 		gun_charge = 0.0
 		can_charge = true
 	if event.is_action_released("hit"):
-		print(gun_charge)
 		can_charge = false
 		animate_gun()
 		request_shoot()
@@ -137,7 +136,6 @@ func slide() -> void:
 			slide_speed += fall_distance / 10
 		else:
 			slide_speed = 10.0
-	print(slide_speed)
 	sliding = true
 
 	if slide_check.is_colliding():

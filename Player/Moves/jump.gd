@@ -1,7 +1,7 @@
 extends Move
 class_name Jump
 
-var jump_time: float = .7
+var jump_time: float = .1
 
 func check_relevance(input : InputPackage) -> String:
 	if works_longer_than(jump_time):
@@ -17,5 +17,5 @@ func update(input : InputPackage, delta : float):
 	player.move_and_slide()
 
 func on_enter_state():
-	player.velocity.y += 15
+	player.velocity.y += 4.5
 	player.play("jump_start")

@@ -19,16 +19,18 @@ func _init() -> void:
 
 func _ready() -> void:
 	var init_result: Dictionary = Steam.steamInitEx()
+	#if init_result[0] != 0:
+	#	print("Check steam initalizing")
 	STEAM_ID = Steam.getSteamID()
 	STEAM_USERNAME = Steam.getPersonaName()
 	Steam.lobby_joined.connect(_on_lobby_joined)
 	multiplayer.peer_connected.connect(func(_id): get_lobby_members())
 	multiplayer.peer_disconnected.connect(func(_id): get_lobby_members())
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	Steam.run_callbacks()
 
-func _on_lobby_joined(this_lobby_id: int, permissions: int, locked: bool, response: int) -> void:
+func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, response: int) -> void:
 	if is_lobby_host:
 		return 
 		
@@ -41,7 +43,6 @@ func _on_lobby_joined(this_lobby_id: int, permissions: int, locked: bool, respon
 		
 		if multiplayer.is_server():
 			spawn_host.emit()
-			print("W")
 
 func get_lobby_members():
 	lobby_members.clear()

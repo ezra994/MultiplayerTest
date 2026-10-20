@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://tdphqmt661bg"]
+
+[ext_resource type="Texture2D" uid="uid://5uixfphnq7cu" path="res://2472892-middle.png" id="1_bvfa1"]
+
+[node name="BulletholeDecal" type="Decal" unique_id=1469080330]
+size = Vector3(0.1, 0.1, 0.1)
+texture_albedo = ExtResource("1_bvfa1")

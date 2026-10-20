@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bjwh0br6683xt"]
+
+[ext_resource type="Script" uid="uid://wo8hkhtwoxs3" path="res://SlopTesting/Player/PlayerUi/player_inventory.gd" id="1_81gno"]
+[ext_resource type="Resource" uid="uid://dyl7a6wqctx3" path="res://SlopTesting/Player/PlayerUi/PlayerInventory.tres" id="2_aofmc"]
+[ext_resource type="PackedScene" uid="uid://1ndtyf7j3ekg" path="res://SlopTesting/Player/PlayerUi/item_container.tscn" id="3_y3qua"]
+
+[node name="PlayerInventory" type="HBoxContainer" unique_id=182798272]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_81gno")
+inventory_data = ExtResource("2_aofmc")
+
+[node name="ItemContainer" parent="." unique_id=659808281 instance=ExtResource("3_y3qua")]
+layout_mode = 2
+
+[node name="ItemContainer2" parent="." unique_id=1217111421 instance=ExtResource("3_y3qua")]
+layout_mode = 2
+
+[node name="ItemContainer3" parent="." unique_id=1996788362 instance=ExtResource("3_y3qua")]
+layout_mode = 2
+
+[node name="ItemContainer4" parent="." unique_id=468346615 instance=ExtResource("3_y3qua")]
+layout_mode = 2
+
+[node name="ItemContainer5" parent="." unique_id=1986901498 instance=ExtResource("3_y3qua")]
+layout_mode = 2
+
+[node name="ItemContainer6" parent="." unique_id=398927004 instance=ExtResource("3_y3qua")]
+layout_mode = 2

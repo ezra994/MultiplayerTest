@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://byhj7fp6p76bd"]
+
+[ext_resource type="Script" uid="uid://dc2d6p7fl322i" path="res://SlopTesting/Inventory/ItemData.gd" id="1_ajqv1"]
+[ext_resource type="PackedScene" uid="uid://dc8gaqkvil16t" path="res://SlopTesting/Enemy/Eye/fake_eye.tscn" id="1_vka3o"]
+[ext_resource type="Texture2D" uid="uid://bjndmwqj4cra1" path="res://Entities/Areas/TestingArea/Domer_domer.png" id="3_n3chx"]
+
+[resource]
+script = ExtResource("1_ajqv1")
+name = "2"
+hold_mode = 1
+scene = ExtResource("1_vka3o")
+description = "GUn2"
+texture = ExtResource("3_n3chx")
+metadata/_custom_type_script = "uid://dc2d6p7fl322i"

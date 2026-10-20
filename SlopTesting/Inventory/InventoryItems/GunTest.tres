@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SlotData" format=3 uid="uid://b5xxtmm5mfkwr"]
+
+[ext_resource type="Resource" uid="uid://buoto3a6hj2wn" path="res://SlopTesting/Inventory/InventoryItems/Gun.tres" id="1_eyul2"]
+[ext_resource type="Script" uid="uid://d3e1fy0yw4444" path="res://SlopTesting/Inventory/slot_data.gd" id="1_mn7yj"]
+
+[resource]
+script = ExtResource("1_mn7yj")
+item_data = ExtResource("1_eyul2")
+metadata/_custom_type_script = "uid://d3e1fy0yw4444"

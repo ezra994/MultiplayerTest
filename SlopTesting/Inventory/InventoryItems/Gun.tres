@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://buoto3a6hj2wn"]
+
+[ext_resource type="PackedScene" uid="uid://ckn41wdwhayin" path="res://SlopTesting/gun.tscn" id="1_agy3u"]
+[ext_resource type="Script" uid="uid://dc2d6p7fl322i" path="res://SlopTesting/Inventory/ItemData.gd" id="1_c4haw"]
+[ext_resource type="Texture2D" uid="uid://cerra4go4xwnq" path="res://bullethole.png" id="2_sxln7"]
+
+[resource]
+script = ExtResource("1_c4haw")
+name = "Gun"
+scene = ExtResource("1_agy3u")
+description = "Gun"
+texture = ExtResource("2_sxln7")
+metadata/_custom_type_script = "uid://dc2d6p7fl322i"

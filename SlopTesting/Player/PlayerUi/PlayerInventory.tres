@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryData" format=3 uid="uid://dyl7a6wqctx3"]
+
+[ext_resource type="Script" uid="uid://dgdkaef4nnoyr" path="res://SlopTesting/Inventory/inventory_data.gd" id="1_xrh5s"]
+[ext_resource type="Script" uid="uid://d3e1fy0yw4444" path="res://SlopTesting/Inventory/slot_data.gd" id="2_qxwh8"]
+[ext_resource type="Resource" uid="uid://b5xxtmm5mfkwr" path="res://SlopTesting/Inventory/InventoryItems/GunTest.tres" id="3_qxwh8"]
+
+[resource]
+script = ExtResource("1_xrh5s")
+slot_datas = Array[ExtResource("2_qxwh8")]([null, ExtResource("3_qxwh8")])
+metadata/_custom_type_script = "uid://dgdkaef4nnoyr"

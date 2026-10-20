@@ -1,7 +1,9 @@
 extends Node3D
 class_name InputGatherer
 
-@onready var player: CharacterBody3D = $".."
+@onready var player: MultiPlayer = $"../.."
+
+
 
 func gather_input() -> InputPackage:
 	var new_input = InputPackage.new()

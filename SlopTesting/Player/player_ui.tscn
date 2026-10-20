@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://cs1ltg48pb1ta"]
+
+[ext_resource type="Script" uid="uid://dqm4u2rnoqi13" path="res://SlopTesting/Player/player_ui.gd" id="1_8omm3"]
+[ext_resource type="PackedScene" uid="uid://8008cuqwc0o3" path="res://SlopTesting/Player/PlayerUi/player_health.tscn" id="1_g8sju"]
+[ext_resource type="Texture2D" uid="uid://bjndmwqj4cra1" path="res://Entities/Areas/TestingArea/Domer_domer.png" id="2_8omm3"]
+[ext_resource type="PackedScene" uid="uid://bjwh0br6683xt" path="res://SlopTesting/Player/PlayerUi/player_inventory.tscn" id="4_4p6p3"]
+
+[node name="PlayerUi" type="CanvasLayer" unique_id=1517238188]
+script = ExtResource("1_8omm3")
+
+[node name="Info" type="VBoxContainer" parent="." unique_id=495771532]
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.75
+anchor_right = 0.25
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MoneyAndAmmo" type="HBoxContainer" parent="Info" unique_id=185838007]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MoneyLabel" type="Label" parent="Info/MoneyAndAmmo" unique_id=1655577093]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "$4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AmmoLabel" type="Label" parent="Info/MoneyAndAmmo" unique_id=103515046]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "∞ / ∞"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthAndMic" type="HBoxContainer" parent="Info" unique_id=64906572]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerHealth" type="HBoxContainer" parent="Info/HealthAndMic" unique_id=422312564]
+layout_mode = 2
+
+[node name="PlayerHealth" parent="Info/HealthAndMic/PlayerHealth" unique_id=1849990897 instance=ExtResource("1_g8sju")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="PlayerHealth3" parent="Info/HealthAndMic/PlayerHealth" unique_id=1067400215 instance=ExtResource("1_g8sju")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="PlayerHealth4" parent="Info/HealthAndMic/PlayerHealth" unique_id=1321926373 instance=ExtResource("1_g8sju")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="PlayerHealth5" parent="Info/HealthAndMic/PlayerHealth" unique_id=190065189 instance=ExtResource("1_g8sju")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="PlayerHealth6" parent="Info/HealthAndMic/PlayerHealth" unique_id=727645318 instance=ExtResource("1_g8sju")]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="AudioButtonPlaceholder" parent="Info/HealthAndMic" unique_id=379890985 instance=ExtResource("1_g8sju")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_8omm3")
+
+[node name="PlayerInventory" parent="." unique_id=182798272 instance=ExtResource("4_4p6p3")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -106.0
+offset_top = -40.0
+offset_right = 106.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0

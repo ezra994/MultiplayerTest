@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="SlotData" format=3 uid="uid://bpli51dn26t3t"]
+
+[ext_resource type="Script" uid="uid://d3e1fy0yw4444" path="res://SlopTesting/Inventory/slot_data.gd" id="1_4ow2u"]
+
+[resource]
+script = ExtResource("1_4ow2u")
+metadata/_custom_type_script = "uid://d3e1fy0yw4444"

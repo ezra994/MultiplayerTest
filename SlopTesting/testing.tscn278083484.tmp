@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://dnmhwsl4wyipt"]
+
+[ext_resource type="PackedScene" uid="uid://baywikhwoml1d" path="res://SlopTesting/multi_player.tscn" id="1_cnevv"]
+[ext_resource type="Script" uid="uid://c3svtmijou3ic" path="res://SlopTesting/navigation_region_3d.gd" id="1_nim0j"]
+[ext_resource type="PackedScene" uid="uid://d20mtsxdepn2f" path="res://SlopTesting/WallTesting/wall.tscn" id="3_kwpj2"]
+[ext_resource type="PackedScene" uid="uid://d3wbp6sfvyht" path="res://SlopTesting/Inventory/GunItem.tscn" id="5_8f7gs"]
+[ext_resource type="PackedScene" uid="uid://dc8gaqkvil16t" path="res://SlopTesting/Enemy/Eye/fake_eye.tscn" id="5_nim0j"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dfkq8"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_nim0j"]
+sky_material = SubResource("ProceduralSkyMaterial_dfkq8")
+
+[sub_resource type="Environment" id="Environment_8f7gs"]
+background_mode = 2
+sky = SubResource("Sky_nim0j")
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_jln51"]
+vertices = PackedVector3Array(-38.742737, 0, 2, -38.742737, 0, -2, -41.492737, 0, -2.25, -41.492737, 0, 2.25, -90.49274, 0, -24.5, -90.49274, 0, 24.5, -41.492737, 0, -24.5, -41.492737, 0, 24.5, -36.242737, 0, 2.25, -36.242737, 0, -2.25, 13.007263, 0, 24.5, 13.007263, 0, -24.5, -36.242737, 0, 24.5, -36.242737, 0, -24.5)
+polygons = [PackedInt32Array(0, 3, 1), PackedInt32Array(1, 3, 2), PackedInt32Array(3, 5, 2), PackedInt32Array(2, 5, 4), PackedInt32Array(4, 6, 2), PackedInt32Array(3, 7, 5), PackedInt32Array(1, 9, 0), PackedInt32Array(0, 9, 8), PackedInt32Array(9, 11, 8), PackedInt32Array(8, 11, 10), PackedInt32Array(10, 12, 8), PackedInt32Array(9, 13, 11)]
+
+[node name="Testing" type="Node3D" unique_id=973619667]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1654242945]
+environment = SubResource("Environment_8f7gs")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1177937199]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=686514689]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08459473, -0.07972145, 0.12033653)
+navigation_mesh = SubResource("NavigationMesh_jln51")
+script = ExtResource("1_nim0j")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D" unique_id=719388604]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.535448, -1, 0)
+use_collision = true
+collision_mask = 0
+size = Vector3(50, 1, 50)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D" unique_id=1669388871]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.99274, -1, 0)
+use_collision = true
+collision_mask = 0
+size = Vector3(50, 1, 50)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D" unique_id=840446410]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.677315, -1, 0)
+use_collision = true
+collision_mask = 0
+size = Vector3(5, 1, 5)
+
+[node name="Wall" parent="NavigationRegion3D" unique_id=708339122 instance=ExtResource("3_kwpj2")]
+transform = Transform3D(-0.06505391, 0, -0.99788177, 0, 1, 0, 0.99788177, 0, -0.06505391, -39.01637, 0.68598175, 0)
+
+[node name="MultiPlayer2" parent="." unique_id=1933658884 instance=ExtResource("1_cnevv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.825371, 0, 3.979908)
+
+[node name="ThrowableItem" parent="." unique_id=838869640 instance=ExtResource("5_8f7gs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.018771, 0.16839933, 0)
+item_data = null
+
+[node name="FakeEye" parent="." unique_id=133409838 instance=ExtResource("5_nim0j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.018771, 0.16839933, 5.579032)
+item_data = null
+
+[node name="FakeEye2" parent="." unique_id=51201159 instance=ExtResource("5_nim0j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.018771, 0.16839933, 2.563799)
+item_data = null
+
+[node name="FakeEye3" parent="." unique_id=1240356772 instance=ExtResource("5_nim0j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.018771, 0.16839933, -1.8625574)
+item_data = null
+
+[node name="FakeEye4" parent="." unique_id=1144841789 instance=ExtResource("5_nim0j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.018771, 0.16839933, 0.6052599)
+item_data = null

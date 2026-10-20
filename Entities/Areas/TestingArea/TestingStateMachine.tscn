@@ -1,6 +1,15 @@
 [gd_scene format=3 uid="uid://bqytu7ghbey3o"]
 
-[ext_resource type="PackedScene" uid="uid://btawc12h1gus0" path="res://Entities/Player/multi_player.tscn" id="1_rkoyf"]
+[ext_resource type="Script" uid="uid://b7api75gdcqvn" path="res://Entities/Areas/TestingArea/testing_state_machine.gd" id="1_ge0bv"]
+[ext_resource type="PackedScene" uid="uid://baywikhwoml1d" path="res://SlopTesting/multi_player.tscn" id="1_rkoyf"]
+[ext_resource type="PackedScene" uid="uid://bfj843bwnb4tf" path="res://HangingVines.glb" id="3_n71vo"]
+[ext_resource type="PackedScene" uid="uid://dv7nelaugbcdk" path="res://Entities/Areas/TestingArea/walking_thinbler.tscn" id="3_rxvck"]
+[ext_resource type="PackedScene" uid="uid://cigo10100bwlm" path="res://SwampTree.glb" id="4_b6jwc"]
+[ext_resource type="PackedScene" uid="uid://covxw8irjkjxb" path="res://SlopTesting/testing_creature.tscn" id="4_oh01h"]
+[ext_resource type="Shader" uid="uid://e1mb043ds2a3" path="res://Entities/Areas/TestingArea/water2.gdshader" id="5_ge0bv"]
+[ext_resource type="Texture2D" uid="uid://rgb2vg8hl62e" path="res://ForestTesting.png" id="6_u6c12"]
+[ext_resource type="PackedScene" uid="uid://qnjgmfj63b0g" path="res://Tree.glb" id="7_llidr"]
+[ext_resource type="PackedScene" uid="uid://ba1tffvpbjvre" path="res://WoodPlank.glb" id="10_gnem0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_elk8i"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -14,33 +23,135 @@ background_mode = 2
 sky = SubResource("Sky_rxvck")
 glow_enabled = true
 
-[node name="TestingStateMachine" type="Node3D" unique_id=306507288]
+[sub_resource type="NavigationMesh" id="NavigationMesh_jln51"]
+vertices = PackedVector3Array(-4.8528924, 74.99421, -34.500004, -4.8528924, 74.99421, 34.499996, 4.1471076, 74.99421, 34.499996, 4.1471076, 74.99421, -34.500004)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=670853152]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b6jwc"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u6c12"]
+noise = SubResource("FastNoiseLite_b6jwc")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_n71vo"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_llidr"]
+noise = SubResource("FastNoiseLite_n71vo")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jolj0"]
+render_priority = 0
+shader = ExtResource("5_ge0bv")
+shader_parameter/surfaceNoise = SubResource("NoiseTexture2D_llidr")
+shader_parameter/distortNoise = SubResource("NoiseTexture2D_u6c12")
+shader_parameter/beer_factor = 6.625
+shader_parameter/foam_distance = 0.01
+shader_parameter/foam_max_distance = 1.89
+shader_parameter/foam_min_distance = 7.295
+shader_parameter/foam_color = Color(0.4745098, 0.15294118, 0.9882353, 1)
+shader_parameter/surface_noise_tiling = Vector2(1, 4)
+shader_parameter/surface_noise_scroll = Vector3(0.03, 0.03, 0)
+shader_parameter/surface_noise_cutoff = 1.0
+shader_parameter/surface_distortion_amount = 0.27
+shader_parameter/_DepthGradientShallow = Color(0.3254902, 0.80784315, 0.41568628, 0.7254902)
+shader_parameter/_DepthGradientDeep = Color(0.08627451, 0.23529412, 0.06666667, 0.7490196)
+shader_parameter/_DepthMaxDistance = 1.0
+shader_parameter/_DepthFactor = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jln51"]
+material = SubResource("ShaderMaterial_jolj0")
+flip_faces = true
+size = Vector2(100, 100)
+subdivide_width = 5
+subdivide_depth = 5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wqh64"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("6_u6c12")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jolj0"]
+material = SubResource("StandardMaterial3D_wqh64")
+size = Vector2(50, 50)
+
+[node name="TestingStateMachine" type="Node3D" unique_id=306507288]
+script = ExtResource("1_ge0bv")
+
+[node name="MultiPlayer" parent="." unique_id=83931239 instance=ExtResource("1_rkoyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 80.73482, 0)
+
+[node name="Creatures" type="Node3D" parent="." unique_id=388437023]
+
+[node name="Enviroment" type="Node3D" parent="." unique_id=574942967]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviroment" unique_id=670853152]
 environment = SubResource("Environment_oh01h")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=384429702]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviroment" unique_id=530810878]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 150.31387, 0)
+light_volumetric_fog_energy = 2.0
 shadow_enabled = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1942734718]
-use_collision = true
-size = Vector3(70, 1, 70)
+[node name="HangingVines" parent="Enviroment" unique_id=1865334717 instance=ExtResource("3_n71vo")]
+transform = Transform3D(-1.7438792, 0, 4.686032, 0, 5, 0, -4.686032, 0, -1.7438792, 16.517593, 73.35909, -5.5521116)
 
-[node name="MultiPlayer" parent="." unique_id=619027815 instance=ExtResource("1_rkoyf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9901738, 0)
+[node name="HangingVines2" parent="Enviroment" unique_id=1052570041 instance=ExtResource("3_n71vo")]
+transform = Transform3D(-1.7438792, 0, 4.686032, 0, 5, 0, -4.686032, 0, -1.7438792, -14.84095, 74.45836, 1.0043039)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1001578513]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7247546, -11.058653)
-use_collision = true
-size = Vector3(4.4, 1, 1)
+[node name="HangingVines3" parent="Enviroment" unique_id=697547847 instance=ExtResource("3_n71vo")]
+transform = Transform3D(-4.6461267, 0, 1.847568, 0, 4.9999995, 0, -1.847568, 0, -4.6461267, 0.3795185, 74.45836, 3.1368036)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1172576499]
-transform = Transform3D(1, 0, 0, 0, 4.4475756, 0, 0, 0, 1, 0, 2.3758862, -14.508493)
-use_collision = true
-size = Vector3(4.4, 1, 1)
+[node name="SwampTree" parent="Enviroment" unique_id=939026616 instance=ExtResource("4_b6jwc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.302882, 72.68121, 23.420063)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=1855178209]
-transform = Transform3D(1, 0, 0, 0, 0.48938245, -0.8720693, 0, 0.8720693, 0.48938245, 0, 2.8260293, 12.462492)
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1363088461]
+transform = Transform3D(0.99996346, -0.0073005646, 0.004437908, 0.007294933, 0.9999726, 0.0012835272, -0.00444716, -0.0012510956, 0.99998933, 0, -1.3285332, 0)
+navigation_mesh = SubResource("NavigationMesh_jln51")
+
+[node name="Boardwalk" type="CSGBox3D" parent="NavigationRegion3D" unique_id=1942734718]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35289192, 72.994194, 0)
 use_collision = true
-size = Vector3(9.34, 12.205, 1)
+size = Vector3(10, 3, 70)
+
+[node name="Thimble2" parent="." unique_id=1153808328 instance=ExtResource("3_rxvck")]
+
+[node name="TestingCreature" parent="." unique_id=105980633 instance=ExtResource("4_oh01h")]
+transform = Transform3D(0.9999989, -0.0008049219, 0.0012333068, 0.0008220033, 0.99990284, -0.013909256, -0.0012219882, 0.013910256, 0.9999025, 0, 1.6654325, -11.648468)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=45730067]
+transform = Transform3D(1, -1.4901161e-08, -1.4901161e-08, -1.4901161e-08, 1, -2.9802322e-08, -1.4901161e-08, 0, 1, 0.009811401, 72.69867, -0.14568901)
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+mesh = SubResource("PlaneMesh_jln51")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1805816283]
+transform = Transform3D(1, -1.4901161e-08, -1.4901161e-08, -1.4901161e-08, 1, -2.9802322e-08, -1.4901161e-08, 0, 1, -0.07086754, 84.155655, 14.773319)
+ignore_occlusion_culling = true
+mesh = SubResource("PlaneMesh_jolj0")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1044294786]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 76.797066, 0)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1827349014]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 76.797066, -5.326496)
+
+[node name="CSGBox3D3" type="CSGSphere3D" parent="." unique_id=1472476831]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 76.797066, -9.218347)
+
+[node name="TestingCreature2" parent="." unique_id=1834701854 instance=ExtResource("4_oh01h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 75.09155, -17.724855)
+
+[node name="Thimble" parent="." unique_id=87292388 instance=ExtResource("3_rxvck")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 76.63654, 0)
+
+[node name="Tree" parent="." unique_id=1899232457 instance=ExtResource("7_llidr")]
+transform = Transform3D(2.385, 0, 0, 0, 2.385, 0, 0, 0, 2.385, 14.15068, 71.45997, 4.028598)
+
+[node name="Tree2" parent="." unique_id=1489216802 instance=ExtResource("7_llidr")]
+transform = Transform3D(2.385, 0, 0, 0, 2.385, 0, 0, 0, 2.385, -17.24351, 71.45997, -10.371335)
+
+[node name="Tree3" parent="." unique_id=1109058456 instance=ExtResource("7_llidr")]
+transform = Transform3D(2.385, 0, 0, 0, 2.385, 0, 0, 0, 2.385, 11.541698, 71.45997, -15.605629)
+
+[node name="WoodPlank" parent="." unique_id=1472363988 instance=ExtResource("10_gnem0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0.85301447, 74.557236, 17.143827)

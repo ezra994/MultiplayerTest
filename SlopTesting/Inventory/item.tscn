@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dyrqm2q1ymvry"]
+
+[ext_resource type="Script" uid="uid://cb7rrislt78cn" path="res://SlopTesting/Inventory/item.gd" id="1_1jjfl"]
+
+[node name="Item" type="Node3D" unique_id=2080553969]
+script = ExtResource("1_1jjfl")
