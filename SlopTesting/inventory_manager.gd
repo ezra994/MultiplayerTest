@@ -33,6 +33,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	#
 	if event.is_action_pressed("Throw"):
 		throw()
+	
+	if event.is_action_pressed("Interact"):
+		interact()
 func _equip_selected() -> void:
 	_clear_held()
 	var slot := inventory_data.get_selected()
@@ -71,6 +74,26 @@ func throw() -> void:
 	elif slot.item_data.hold_mode == ItemData.HoldMode.GRAB:
 		current_item_scene = null
 		grabbing_manager.throw()
+		remove_slot()
+
+func interact() -> void:
+	var g = grabbing_manager.grabbed_object
+	if g and g != current_item_scene:
+		grabbing_manager.drop()
+		return
+
+	# Otherwise throw the equipped item
+	var slot := inventory_data.get_selected()
+	if slot == null or slot.item_data == null or slot.item_data.hold_mode == ItemData.HoldMode.HAND: grabbing_manager.test()
+	
+	#if slot.item_data.hold_mode == ItemData.HoldMode.HAND:
+		#if slot.item_data.throwable_scene == null: return
+		#else: 
+			#await get_tree().physics_frame
+			#grabbing_manager.throwable_object(slot.item_data.throwable_scene)
+	elif slot.item_data.hold_mode == ItemData.HoldMode.GRAB:
+		current_item_scene = null
+		grabbing_manager.drop()
 		remove_slot()
 
 func _clear_held() -> void:

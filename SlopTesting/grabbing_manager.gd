@@ -19,14 +19,19 @@ var grabbed_object: RigidBody3D = null
 func _ready() -> void:
 	looking_raycast.add_exception(player)
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("Interact"):
-		var target := _get_closest_target()
-		if target:
-			grab(target)
-		elif grabbed_object:
-			drop()
+#func _unhandled_input(event: InputEvent) -> void:
+	#if event.is_action_pressed("Interact"):
+		#var target := _get_closest_target()
+		#if target:
+			#grab(target)
+		#elif grabbed_object:
+			#drop()
 
+func test() -> void:
+	var target := _get_closest_target()
+	if target:
+		grab(target)
+		
 func _physics_process(delta: float) -> void:
 	if grabbed_object == null:
 		return
