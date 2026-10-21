@@ -23,8 +23,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			var collided = looking_raycast.get_collider(0)
 			if collided is Item:
 				pickup.emit(collided)
-			if collided is RigidBody3D:
+			elif collided is RigidBody3D:
 				grab(collided)
+				print("GRABBED")
+			else:
+				print("WHAT")
 	elif event.is_action_pressed("Throw") and grabbed_object:
 		throw()
 
