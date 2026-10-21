@@ -3,6 +3,7 @@ class_name InventoryData
 
 signal selected_changed(index: int)
 @export var slot_datas: Array[SlotData]
+@export var hand_slot: SlotData
 var selected_index := 0
 
 func select(index: int) -> void:
@@ -22,7 +23,7 @@ func add_item(item_data: ItemData) -> bool:
 		var s := slot_datas[i]
 		if s == null or s.item_data == null:
 			var new_slot := SlotData.new()
-			new_slot.item_data = item_data
+			new_slot.item_data = item_data.duplicate(true)
 			slot_datas[i] = new_slot
 			emit_changed()
 			if i == selected_index:
@@ -31,6 +32,6 @@ func add_item(item_data: ItemData) -> bool:
 	return false
 
 func remove_from_slot(held_slot) -> void:
-	print(held_slot)
+	print("HELLO")
 	slot_datas[held_slot] = null
 	emit_changed()

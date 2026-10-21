@@ -3,7 +3,7 @@ class_name Item
 
 
 
-var item_data: ItemData
+@export var item_data: ItemData
 
 func pickup() -> ItemData:
 	return item_data

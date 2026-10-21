@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bd6ouiu62fkrp"]
+
+[ext_resource type="Script" uid="uid://bfggqujv7lm26" path="res://SlopTesting/grabbing_manager.gd" id="1_jnerc"]
+[ext_resource type="Resource" uid="uid://dyl7a6wqctx3" path="res://SlopTesting/Player/PlayerUi/PlayerInventory.tres" id="2_iif3y"]
+
+[node name="GrabbingManager" type="Node3D" unique_id=1428401310]
+visible = false
+script = ExtResource("1_jnerc")
+inventory_data = ExtResource("2_iif3y")

@@ -2,15 +2,14 @@
 
 [ext_resource type="Script" uid="uid://c87ten6ocbxk8" path="res://Player/data.gd" id="1_ntf0f"]
 [ext_resource type="Script" uid="uid://c71hu50h11sli" path="res://SlopTesting/multi_player.gd" id="1_s364m"]
+[ext_resource type="PackedScene" uid="uid://och0vudprobt" path="res://SlopTesting/Player/inventory_manager.tscn" id="2_40qqb"]
 [ext_resource type="Script" uid="uid://dm783yd8kgvk8" path="res://Player/combat_model.gd" id="2_pmycm"]
-[ext_resource type="Script" uid="uid://bfggqujv7lm26" path="res://SlopTesting/grabbing_manager.gd" id="3_kg4oa"]
+[ext_resource type="PackedScene" uid="uid://bd6ouiu62fkrp" path="res://SlopTesting/Player/grabbing_manager.tscn" id="3_kg4oa"]
 [ext_resource type="Script" uid="uid://x14vnoqagdix" path="res://visuals.gd" id="3_s364m"]
 [ext_resource type="Script" uid="uid://bm5eeeg4mek0p" path="res://SlopTesting/test_input_gatherer.gd" id="5_6qlto"]
 [ext_resource type="Script" uid="uid://cs0ksd7jseusa" path="res://SlopTesting/player_model.gd" id="5_78jk7"]
 [ext_resource type="Script" uid="uid://dx3uea01aem0o" path="res://Player/Moves/idle.gd" id="6_5jqes"]
-[ext_resource type="Script" uid="uid://4yvia2jdxhqq" path="res://SlopTesting/inventory_manager.gd" id="6_kg4oa"]
 [ext_resource type="Script" uid="uid://lb31k32hpnfv" path="res://Player/Moves/walk.gd" id="7_0yhh2"]
-[ext_resource type="Resource" uid="uid://dyl7a6wqctx3" path="res://SlopTesting/Player/PlayerUi/PlayerInventory.tres" id="7_pagb6"]
 [ext_resource type="Script" uid="uid://b076v1p3awqn2" path="res://Player/Moves/midair.gd" id="8_0yhh2"]
 [ext_resource type="Script" uid="uid://cibpa1i5rdb12" path="res://Player/Moves/jump.gd" id="9_lqhq2"]
 [ext_resource type="Script" uid="uid://b468ukup2qgrl" path="res://Player/Moves/sprint.gd" id="10_vycb6"]
@@ -95,13 +94,10 @@ head = NodePath("Head")
 
 [node name="Components" type="Node3D" parent="." unique_id=2062160252]
 
-[node name="InventoryManager" type="Node3D" parent="Components" unique_id=915622741 node_paths=PackedStringArray("item_holder")]
-script = ExtResource("6_kg4oa")
-inventory_data = ExtResource("7_pagb6")
+[node name="InventoryManager" parent="Components" unique_id=413983341 node_paths=PackedStringArray("item_holder") instance=ExtResource("2_40qqb")]
 item_holder = NodePath("../../Head/ItemHolder")
 
-[node name="GrabbingManager" type="Node3D" parent="Components" unique_id=561535462]
-script = ExtResource("3_kg4oa")
+[node name="GrabbingManager" parent="Components" unique_id=1428401310 instance=ExtResource("3_kg4oa")]
 
 [node name="PlayerData" type="Node3D" parent="Components" unique_id=1552673091]
 script = ExtResource("1_ntf0f")

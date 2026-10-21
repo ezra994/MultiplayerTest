@@ -6,6 +6,7 @@ const ITEM_CONTAINER = preload("uid://1ndtyf7j3ekg")
 func _ready() -> void:
 	inventory_data.changed.connect(_rebuild)
 	inventory_data.selected_changed.connect(_highlight)
+	
 	_rebuild()
 
 func _rebuild() -> void:
@@ -22,3 +23,7 @@ func _highlight(index: int) -> void:
 		var c = get_child(i)
 		if i == index: c.highlight()
 		else: c.unhighlight()
+
+func _unhighlight() -> void:
+	for i in get_children():
+		i.unhighlight()

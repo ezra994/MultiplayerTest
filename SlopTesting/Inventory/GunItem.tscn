@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://d3wbp6sfvyht"]
 
 [ext_resource type="Script" uid="uid://dht6fye6wj5xe" path="res://SlopTesting/Inventory/gun_item.gd" id="1_yi2j8"]
+[ext_resource type="Resource" uid="uid://buoto3a6hj2wn" path="res://SlopTesting/Inventory/InventoryItems/Gun.tres" id="2_i8eh5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_034db"]
 
@@ -87,6 +88,7 @@ size = Vector3(0.5189209, 0.3796692, 0.21466064)
 collision_layer = 8
 collision_mask = 15
 script = ExtResource("1_yi2j8")
+item_data = ExtResource("2_i8eh5")
 
 [node name="GeneralSkeleton" type="Skeleton3D" parent="." unique_id=801967812]
 unique_name_in_owner = true

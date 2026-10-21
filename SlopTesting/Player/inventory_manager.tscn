@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://och0vudprobt"]
+
+[ext_resource type="Script" uid="uid://4yvia2jdxhqq" path="res://SlopTesting/inventory_manager.gd" id="1_8hwga"]
+[ext_resource type="Resource" uid="uid://dyl7a6wqctx3" path="res://SlopTesting/Player/PlayerUi/PlayerInventory.tres" id="2_6ptvs"]
+
+[node name="InventoryManager" type="Node3D" unique_id=413983341]
+script = ExtResource("1_8hwga")
+inventory_data = ExtResource("2_6ptvs")
