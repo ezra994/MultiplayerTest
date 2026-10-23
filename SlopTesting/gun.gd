@@ -23,17 +23,21 @@ func spawn_bullet_casing() -> void:
 
 func shoot_bullet() -> void:
 	if not rayCast.is_colliding():
+		print("W")
 		return
-
+	
+	print("H")
 	var collider := rayCast.get_collider()
 	var point := rayCast.get_collision_point()
 	var shot_dir := (rayCast.to_global(rayCast.target_position) - rayCast.global_position).normalized()
-
 	if collider.is_in_group("Enemy"):
+		print("?")
 		collider.take_damage(1.0, shot_dir, 30.0, point) #1 shot for testing
 	elif collider is PhysicalBone3D: #When shooting bone it moves
+		print("WHAt")
 		collider.apply_impulse(shot_dir * 500.0, point - collider.global_position)
 	else:
+		print(collider.name)
 		decal(rayCast.get_collision_normal())
 		
 const BULLETHOLE_DECAL = preload("uid://tdphqmt661bg")

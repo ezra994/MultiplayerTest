@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dkwxotmdoisyv"]
 
 [ext_resource type="PackedScene" uid="uid://c4iinvxl5wn64" path="res://LiftMapInProgress.glb" id="1_rlr3j"]
-[ext_resource type="PackedScene" uid="uid://baywikhwoml1d" path="res://SlopTesting/multi_player.tscn" id="2_v5yec"]
+[ext_resource type="PackedScene" uid="uid://baywikhwoml1d" path="res://SlopTesting/multiplayer.tscn" id="2_v5yec"]
 [ext_resource type="PackedScene" uid="uid://covxw8irjkjxb" path="res://SlopTesting/testing_creature.tscn" id="3_v5yec"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_jln51"]

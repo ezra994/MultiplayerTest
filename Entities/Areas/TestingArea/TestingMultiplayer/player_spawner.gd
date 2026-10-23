@@ -6,7 +6,7 @@ func _ready() -> void:
 	spawn_function = spawn_player
 	if !SteamManager.setup.is_connected(setup):
 		SteamManager.setup.connect(setup)
-# Call this manually right after multiplayer.multiplayer_peer is assigned
+
 func setup() -> void:
 	if multiplayer.is_server():
 		multiplayer.peer_connected.connect(spawn)

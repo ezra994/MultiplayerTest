@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b5m5goi2fe3w2" path="res://Entities/Areas/TestingArea/TestingMultiplayer/testing_multiplayer.gd" id="1_cg07q"]
 [ext_resource type="Script" uid="uid://bd46ocyud8my4" path="res://Entities/Areas/TestingArea/TestingMultiplayer/player_spawner.gd" id="2_rmwmv"]
-[ext_resource type="PackedScene" uid="uid://btawc12h1gus0" path="res://Entities/Player/multi_player.tscn" id="3_0p367"]
-[ext_resource type="PackedScene" uid="uid://cg5guu2wh0eca" path="res://Entities/Areas/TestingArea/Domer.glb" id="4_0p367"]
+[ext_resource type="PackedScene" uid="uid://baywikhwoml1d" path="res://SlopTesting/multiplayer.tscn" id="3_rmwmv"]
 [ext_resource type="Shader" uid="uid://bj6mm3ck70fkj" path="res://Entities/Shaders/ps1_shader.gdshader" id="5_0p367"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ij80u"]
@@ -24,8 +23,8 @@ volumetric_fog_density = 0.0181
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jln51"]
 shader = ExtResource("5_0p367")
-shader_parameter/color_depth = 2
-shader_parameter/dithering = false
+shader_parameter/color_depth = 3
+shader_parameter/dithering = true
 
 [node name="TestingMultiplayer" type="Node3D" unique_id=622462444]
 script = ExtResource("1_cg07q")
@@ -72,7 +71,7 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 spawn_path = NodePath("..")
 script = ExtResource("2_rmwmv")
-player_scene = ExtResource("3_0p367")
+player_scene = ExtResource("3_rmwmv")
 
 [node name="SpawnPosition" type="Marker3D" parent="Players" unique_id=2096085560]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59235, -9.516685)
@@ -87,25 +86,6 @@ unique_name_in_owner = true
 _spawnable_scenes = PackedStringArray("uid://c3im7dphtwp4e")
 spawn_path = NodePath("../SpawnContainer")
 
-[node name="Objects" type="Node3D" parent="." unique_id=1857214057]
-
-[node name="Domer" parent="Objects" unique_id=1775333074 instance=ExtResource("4_0p367")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0746026, 6.154573)
-
-[node name="Domer2" parent="Objects" unique_id=857977317 instance=ExtResource("4_0p367")]
-transform = Transform3D(2.7265434, 0, 0, 0, 1.7376866, 0, 0, 0, 1, 9.536743e-07, 1.2543697, -5.0721965)
-
-[node name="Domer3" parent="Objects" unique_id=1827694063 instance=ExtResource("4_0p367")]
-transform = Transform3D(2.387633, 0, 0, 0, 1.7376866, 0, 0, 0, 3.8232973, 11.269638, 1.2543697, 1.3347149)
-
-[node name="Domer4" parent="Objects" unique_id=896956526 instance=ExtResource("4_0p367")]
-transform = Transform3D(7.4889627, 0, 0, 0, 1.7376866, 0, 0, 0, 11.39627, -15.206255, 1.2543697, 1.3347149)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Objects" unique_id=1572547547]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0018911362, 0.0072199106, -0.0034618378)
-use_collision = true
-size = Vector3(50, 0.1, 50)
-
 [node name="Enviroment" type="Node3D" parent="." unique_id=1341825614]
 
 [node name="DirectionalLight3D2" type="WorldEnvironment" parent="Enviroment" unique_id=648752863]
@@ -117,8 +97,12 @@ light_energy = 0.1
 shadow_enabled = true
 shadow_blur = 10.0
 
+[node name="CSGBox3D" type="CSGBox3D" parent="Enviroment" unique_id=1572547547]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0018911362, 0.0072199106, -0.0034618378)
+use_collision = true
+size = Vector3(50, 0.1, 50)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1427323681]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=503823344]
 material = SubResource("ShaderMaterial_jln51")

@@ -1,0 +1,220 @@
+[gd_scene format=3 uid="uid://baywikhwoml1d"]
+
+[ext_resource type="Script" uid="uid://c87ten6ocbxk8" path="res://Player/data.gd" id="1_ntf0f"]
+[ext_resource type="Script" uid="uid://c71hu50h11sli" path="res://SlopTesting/multi_player.gd" id="1_s364m"]
+[ext_resource type="PackedScene" uid="uid://och0vudprobt" path="res://SlopTesting/Player/inventory_manager.tscn" id="2_40qqb"]
+[ext_resource type="Script" uid="uid://dm783yd8kgvk8" path="res://Player/combat_model.gd" id="2_pmycm"]
+[ext_resource type="PackedScene" uid="uid://bd6ouiu62fkrp" path="res://SlopTesting/Player/grabbing_manager.tscn" id="3_kg4oa"]
+[ext_resource type="Script" uid="uid://x14vnoqagdix" path="res://visuals.gd" id="3_s364m"]
+[ext_resource type="Script" uid="uid://bm5eeeg4mek0p" path="res://SlopTesting/test_input_gatherer.gd" id="5_6qlto"]
+[ext_resource type="Script" uid="uid://cs0ksd7jseusa" path="res://SlopTesting/player_model.gd" id="5_78jk7"]
+[ext_resource type="Script" uid="uid://dx3uea01aem0o" path="res://Player/Moves/idle.gd" id="6_5jqes"]
+[ext_resource type="Script" uid="uid://lb31k32hpnfv" path="res://Player/Moves/walk.gd" id="7_0yhh2"]
+[ext_resource type="Script" uid="uid://b076v1p3awqn2" path="res://Player/Moves/midair.gd" id="8_0yhh2"]
+[ext_resource type="Script" uid="uid://cibpa1i5rdb12" path="res://Player/Moves/jump.gd" id="9_lqhq2"]
+[ext_resource type="Script" uid="uid://b468ukup2qgrl" path="res://Player/Moves/sprint.gd" id="10_vycb6"]
+[ext_resource type="Shader" uid="uid://bhlxrw4ib6oir" path="res://Entities/Areas/TestingArea/d.gdshader" id="13_stjv0"]
+[ext_resource type="Texture2D" uid="uid://5uixfphnq7cu" path="res://2472892-middle.png" id="14_47pas"]
+[ext_resource type="PackedScene" uid="uid://cs1ltg48pb1ta" path="res://SlopTesting/Player/player_ui.tscn" id="16_40qqb"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_ivq2j"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_526me"]
+render_priority = 0
+shader = ExtResource("13_stjv0")
+shader_parameter/light_direction = Vector3(0.5, 0, 0)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/ambient = Color(0.15, 0.15, 0.15, 1)
+shader_parameter/use_stepped = true
+shader_parameter/steps = 3.0
+shader_parameter/step_smoothness = 0.3
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.35000000521542
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 0.40000000596048
+shader_parameter/rim_blend = 0.30000000447036
+shader_parameter/use_pattern = false
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+shader_parameter/effect_strength = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jolj0"]
+render_priority = -128
+shader = ExtResource("13_stjv0")
+shader_parameter/light_direction = Vector3(0.3, 0.8, 0.5)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/ambient = Color(0.018948065, 0.1498766, 0.2887716, 1)
+shader_parameter/use_stepped = true
+shader_parameter/steps = 3.0
+shader_parameter/step_smoothness = 0.05000000074506
+shader_parameter/shadow_tint = Color(0.37413925, 0.37413928, 0.37413922, 1)
+shader_parameter/shadow_tint_amount = 0.0
+shader_parameter/specular = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(0.16385847, 0.6714705, 0.6828941, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 0.45000000670554
+shader_parameter/rim_blend = 0.2500000037253
+shader_parameter/use_pattern = true
+shader_parameter/pattern_texture = ExtResource("14_47pas")
+shader_parameter/pattern_tiling = 192.0
+shader_parameter/pattern_amount = 0.90000001341108
+shader_parameter/pattern_smoothness = 0.05000000074506
+shader_parameter/pattern_blend = 1.0
+shader_parameter/effect_strength = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_jln51"]
+material = SubResource("ShaderMaterial_jolj0")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jln51"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jolj0"]
+radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kg4oa"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jln51"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ivq2j"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("Components/VoiceChat:position")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jln51"]
+
+[node name="Multiplayer" type="CharacterBody3D" unique_id=83931239 node_paths=PackedStringArray("data", "visuals", "input_gatherer", "model", "head") groups=["player"]]
+collision_layer = 2
+script = ExtResource("1_s364m")
+steam_id = null
+player_name = null
+data = NodePath("Components/PlayerData")
+visuals = NodePath("Components/Visuals")
+input_gatherer = NodePath("Components/InputGatherer")
+model = NodePath("Components/PlayerModel")
+head = NodePath("Head")
+mouse_sensitivity = null
+max_pitch_deg = null
+
+[node name="Components" type="Node3D" parent="." unique_id=2062160252]
+
+[node name="InventoryManager" parent="Components" unique_id=413983341 node_paths=PackedStringArray("item_holder") instance=ExtResource("2_40qqb")]
+item_holder = NodePath("../../Head/ItemHolder")
+
+[node name="GrabbingManager" parent="Components" unique_id=1428401310 instance=ExtResource("3_kg4oa")]
+
+[node name="PlayerData" type="Node3D" parent="Components" unique_id=1552673091]
+script = ExtResource("1_ntf0f")
+metadata/_custom_type_script = "uid://c87ten6ocbxk8"
+
+[node name="CombatModel" type="Node3D" parent="Components" unique_id=1179229504]
+script = ExtResource("2_pmycm")
+metadata/_custom_type_script = "uid://dm783yd8kgvk8"
+
+[node name="Visuals" type="Node3D" parent="Components" unique_id=184502283]
+script = ExtResource("3_s364m")
+
+[node name="PlayerModel" type="Node3D" parent="Components" unique_id=1070123399]
+script = ExtResource("5_78jk7")
+metadata/_custom_type_script = "uid://0kfd7vkhbryw"
+
+[node name="Idle" type="Node" parent="Components/PlayerModel" unique_id=2033701679]
+script = ExtResource("6_5jqes")
+metadata/_custom_type_script = "uid://dx3uea01aem0o"
+
+[node name="Walk" type="Node" parent="Components/PlayerModel" unique_id=859711484]
+script = ExtResource("7_0yhh2")
+metadata/_custom_type_script = "uid://lb31k32hpnfv"
+
+[node name="Midair" type="Node" parent="Components/PlayerModel" unique_id=1281780091]
+script = ExtResource("8_0yhh2")
+metadata/_custom_type_script = "uid://b076v1p3awqn2"
+
+[node name="Jump" type="Node" parent="Components/PlayerModel" unique_id=149726496]
+script = ExtResource("9_lqhq2")
+metadata/_custom_type_script = "uid://cibpa1i5rdb12"
+
+[node name="Sprint" type="Node" parent="Components/PlayerModel" unique_id=1921128637]
+script = ExtResource("10_vycb6")
+metadata/_custom_type_script = "uid://b468ukup2qgrl"
+
+[node name="InputGatherer" type="Node3D" parent="Components" unique_id=2018742961]
+script = ExtResource("5_6qlto")
+metadata/_custom_type_script = "uid://cr0wwv6ohntw0"
+
+[node name="VoiceChat" type="AudioStreamPlayer3D" parent="Components" unique_id=1123169025]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamGenerator_ivq2j")
+
+[node name="Head" type="Node3D" parent="." unique_id=778621245]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7898862, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=638140706]
+
+[node name="Shader" type="MeshInstance3D" parent="Head/Camera3D" unique_id=629231353]
+visible = false
+sorting_offset = 1000.0
+material_overlay = SubResource("ShaderMaterial_526me")
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_jln51")
+
+[node name="Unzoomed" type="Marker3D" parent="Head" unique_id=1962319036]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.92780745, -0.54326653, -1.3073349)
+
+[node name="Zoomed" type="Marker3D" parent="Head" unique_id=2028884411]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13771653, -0.44169545, -1.8080726)
+
+[node name="ItemHolder" type="Node3D" parent="Head" unique_id=1011860187]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.92780745, -0.54326653, -1.3073349)
+
+[node name="LookingRaycast" type="ShapeCast3D" parent="Head" unique_id=235120133]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.111971855, 0)
+shape = SubResource("SphereShape3D_jln51")
+target_position = Vector3(0, 0, -2)
+collision_mask = 9
+collide_with_areas = true
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Head" unique_id=1641860423]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+shape = SubResource("SphereShape3D_jolj0")
+spring_length = 2.0
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Head/SpringArm3D" unique_id=802470581]
+radius = 0.1
+material = SubResource("StandardMaterial3D_kg4oa")
+
+[node name="ObjectPosition" type="Marker3D" parent="Head/SpringArm3D" unique_id=1275040803]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=558765227]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_jln51")
+
+[node name="PlayerUi" parent="." unique_id=1517238188 instance=ExtResource("16_40qqb")]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1155219247]
+replication_config = SubResource("SceneReplicationConfig_ivq2j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2145722701]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_jln51")
+
+[node name="PlayerName" type="Label3D" parent="." unique_id=617789471]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9766846, 0)
+billboard = 2
+text = "Sex/com,"

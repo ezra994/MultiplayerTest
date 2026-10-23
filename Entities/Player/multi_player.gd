@@ -116,18 +116,7 @@ func _input(event: InputEvent) -> void:
 		self.rotation.y -= event.relative.x * sens
 		camera_3d.rotation.x -= event.relative.y * sens
 		camera_3d.rotation.x = clamp(camera_3d.rotation.x, deg_to_rad(-30), deg_to_rad(15))
-	
-	if event.is_action_pressed("test_l"):
-		$MeshInstance3D.rotation.z = deg_to_rad(50)
-	
-	if event.is_action_released("test_l"):
-		$MeshInstance3D.rotation.z = deg_to_rad(0)
-	
-	if event.is_action_pressed("test_r"):
-		$MeshInstance3D.rotation.z = deg_to_rad(-50)
-	
-	if event.is_action_released("test_r"):
-		$MeshInstance3D.rotation.z = deg_to_rad(0)
+
 		
 func slide() -> void:
 	if !sliding:

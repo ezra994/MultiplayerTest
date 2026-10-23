@@ -149,14 +149,3 @@ diffuse_curve={
 "type": "sampler2D",
 "value": "::GradientTexture1D_jln51"
 }
-
-[steam]
-
-initialization/app_data/app_type=0
-initialization/app_data/app_id=0
-initialization/app_data/demo_id=0
-initialization/app_data/playtest_id=0
-initialization/app_data/tool_id=0
-initialization/processes/initialize_on_startup=false
-initialization/processes/embed_callbacks=false
-multiplayer_peer/max_channels=4

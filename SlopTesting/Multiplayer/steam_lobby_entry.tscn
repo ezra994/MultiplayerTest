@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b8qiilmm0r1hy"]
+
+[ext_resource type="Script" uid="uid://b7xipqsbo1o63" path="res://SlopTesting/Multiplayer/steam_lobby_entry.gd" id="1_0d2xp"]
+
+[node name="SteamLobbyEntry" type="HBoxContainer" unique_id=114196318]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+script = ExtResource("1_0d2xp")
+
+[node name="Name" type="Label" parent="." unique_id=1958855354]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Join" type="Button" parent="." unique_id=1632387515]
+layout_mode = 2
+size_flags_horizontal = 3

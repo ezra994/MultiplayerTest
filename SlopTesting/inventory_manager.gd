@@ -86,11 +86,6 @@ func interact() -> void:
 	var slot := inventory_data.get_selected()
 	if slot == null or slot.item_data == null or slot.item_data.hold_mode == ItemData.HoldMode.HAND: grabbing_manager.test()
 	
-	#if slot.item_data.hold_mode == ItemData.HoldMode.HAND:
-		#if slot.item_data.throwable_scene == null: return
-		#else: 
-			#await get_tree().physics_frame
-			#grabbing_manager.throwable_object(slot.item_data.throwable_scene)
 	elif slot.item_data.hold_mode == ItemData.HoldMode.GRAB:
 		current_item_scene = null
 		grabbing_manager.drop()

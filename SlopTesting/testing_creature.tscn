@@ -218,6 +218,12 @@ _data = {
 [node name="TestingCreature" type="CharacterBody3D" unique_id=105980633 groups=["Enemy"]]
 collision_layer = 4
 script = ExtResource("1_tktkk")
+movement_speed = null
+turn_speed = null
+gravity = null
+model_yaw_offset = null
+repath_interval = null
+path_end_stop_distance = null
 
 [node name="metarig" type="Node3D" parent="." unique_id=967240049]
 

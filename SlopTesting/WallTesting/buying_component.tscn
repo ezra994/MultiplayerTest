@@ -2,12 +2,5 @@
 
 [ext_resource type="Script" uid="uid://qpoppuj1kxcp" path="res://SlopTesting/WallTesting/area_3d.gd" id="1_ouuak"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jln51"]
-size = Vector3(6.4038086, 6.584839, 2.166626)
-
 [node name="Area3D" type="Area3D" unique_id=823483614]
 script = ExtResource("1_ouuak")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1250242687]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24487305, 2.7924194, -0.03289795)
-shape = SubResource("BoxShape3D_jln51")

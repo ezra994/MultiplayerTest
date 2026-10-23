@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bqytu7ghbey3o"]
 
 [ext_resource type="Script" uid="uid://b7api75gdcqvn" path="res://Entities/Areas/TestingArea/testing_state_machine.gd" id="1_ge0bv"]
-[ext_resource type="PackedScene" uid="uid://baywikhwoml1d" path="res://SlopTesting/multi_player.tscn" id="1_rkoyf"]
+[ext_resource type="PackedScene" uid="uid://baywikhwoml1d" path="res://SlopTesting/multiplayer.tscn" id="1_rkoyf"]
 [ext_resource type="PackedScene" uid="uid://bfj843bwnb4tf" path="res://HangingVines.glb" id="3_n71vo"]
 [ext_resource type="PackedScene" uid="uid://dv7nelaugbcdk" path="res://Entities/Areas/TestingArea/walking_thinbler.tscn" id="3_rxvck"]
 [ext_resource type="PackedScene" uid="uid://cigo10100bwlm" path="res://SwampTree.glb" id="4_b6jwc"]

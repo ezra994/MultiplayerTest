@@ -3,7 +3,7 @@ class_name Enemy
 
 var health: float = 10.0
 const EYE = preload("uid://brdehayx14jls")
-const RAGDOLL = preload("uid://cf50dtf424d0i")
+
 var eyes: Array
 
 @export var movement_speed: float = 4.0
@@ -125,10 +125,11 @@ func die(hit_dir: Vector3, strength: float, hit_point: Vector3) -> void:
 	queue_free()
 
 func spawn_ragdoll(hit_dir: Vector3, strength: float, hit_point: Vector3) -> void:
-	var r = RAGDOLL.instantiate()
-	get_tree().current_scene.add_child(r)
-	r.global_transform = global_transform
-	r.start(%GeneralSkeleton, hit_dir, hit_point, strength, velocity)
+	pass
+#	var r = RAGDOLL.instantiate()
+#	get_tree().current_scene.add_child(r)
+	#r.global_transform = global_transform
+#	r.start(%GeneralSkeleton, hit_dir, hit_point, strength, velocity)
 
 func pop_eyes(hit_dir: Vector3, strength: float, hit_point: Vector3) -> void:
 	for eye in eyes:

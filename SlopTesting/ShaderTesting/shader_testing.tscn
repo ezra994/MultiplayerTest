@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://bxarnk8ihktlj"]
+
+[ext_resource type="Shader" uid="uid://ccwcefds3vr1i" path="res://SlopTesting/ShaderTesting/shader_testing.tres" id="1_eeg8k"]
+[ext_resource type="Material" uid="uid://yeractqbuw0s" path="res://SlopTesting/ShaderTesting/ice_mat.tres" id="2_8i2a2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_itkis"]
+render_priority = 0
+shader = ExtResource("1_eeg8k")
+shader_parameter/Idk = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eeg8k"]
+
+[node name="ShaderTesting" type="Node3D" unique_id=518389519]
+
+[node name="Enviroment" type="Node3D" parent="." unique_id=559544748]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Enviroment" unique_id=1519446557]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.111163735, 0, 0.10125828)
+size = Vector3(10, 1, 10)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=380215348]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7745001, 1.6236411, 2.1630626)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=1136028918]
+transform = Transform3D(0.99997205, -0.0067259013, 0.003259966, 0.006722676, 0.9999769, 0.0009988493, -0.0032666114, -0.0009768975, 0.99999416, -2.47519, 1.6808203, 1.1841114)
+material_override = SubResource("ShaderMaterial_itkis")
+material_overlay = ExtResource("2_8i2a2")
+radius = 2.27
+radial_segments = 5
+rings = 5
+material = SubResource("StandardMaterial3D_eeg8k")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1832386138]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0958893, 2.2136226, 7.4135857)

@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://yeractqbuw0s"]
+
+[ext_resource type="Shader" uid="uid://kbm7hjqcbh88" path="res://ice.gdshader" id="1_ygxmw"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_itkis"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8i2a2"]
+noise = SubResource("FastNoiseLite_itkis")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ygxmw")
+shader_parameter/FresnelPower = -1.8599999999999999
+shader_parameter/FresnelColor = Color(0.6, 0.85, 1, 1)
+shader_parameter/Color = Color(0.7, 0.9, 1, 1)
+shader_parameter/Tiling = Vector3(1, 1, 0)
+shader_parameter/Offset = Vector3(0, 0, 0)
+shader_parameter/Ice_Texture = SubResource("NoiseTexture2D_8i2a2")
+shader_parameter/RefractionAmount = 0.645
+shader_parameter/Metallic = 0.134
+shader_parameter/Smoothness = 0.627
+shader_parameter/Normals = 0.77
