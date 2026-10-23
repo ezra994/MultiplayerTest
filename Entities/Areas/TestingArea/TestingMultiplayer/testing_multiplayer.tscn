@@ -23,7 +23,7 @@ volumetric_fog_density = 0.0181
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jln51"]
 shader = ExtResource("5_0p367")
-shader_parameter/color_depth = 3
+shader_parameter/color_depth = 6
 shader_parameter/dithering = true
 
 [node name="TestingMultiplayer" type="Node3D" unique_id=622462444]
